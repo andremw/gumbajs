@@ -1,0 +1,28 @@
+{
+  "name": "kogenerator",
+  "version": "0.0.1",
+  "description": "Component code generator for projects done with AEM and Sightly.",
+  "main": "index.js",
+  "scripts": {
+    "test": "xo && ava",
+    "watch:test": "ava --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://andremw_cit@bitbucket.org/andremw_cit/kogenerator.git"
+  },
+  "keywords": [
+    "aem",
+    "adobe",
+    "cq",
+    "sightly",
+    "jsp"
+  ],
+  "author": "andremw",
+  "license": "MIT",
+  "homepage": "https://bitbucket.org/andremw_cit/kogenerator#readme",
+  "devDependencies": {
+    "ava": "^0.14.0",
+    "xo": "^0.15.0"
+  }
+}
