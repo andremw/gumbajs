@@ -13,7 +13,7 @@ module.exports = config => {
     const filename = `${config.modelName}.java`;
     const filepath = `${config.filepath}/${filename}`;
 
-    fs.readFile(`../fileTemplates/model.java`, 'utf-8').then(file => {
+    fs.readFile(`../templates/model.java`, 'utf-8').then(file => {
         const renderedFile = renderModelOnTemplate(config, file);
         fs.writeFile(filepath, renderedFile).then(resolve, reject);
     }, reject);

@@ -28,14 +28,14 @@ function createBasicStructure(config) {
     const folderPath = `${config.componentsFolderPath}/${folderName}/`;
 
     xmlFiles.forEach(xmlFile => {
-        readFile(`../fileTemplates/${xmlFile}`).then(fileContent => {
+        readFile(`../templates/${xmlFile}`).then(fileContent => {
             const filepath = `${folderPath}/${xmlFile}`;
             const renderedFile = mustache.render(fileContent, config);
             writeFile(filepath, renderedFile);
         });
     });
 
-    readFile(`../fileTemplates/${htmlFile}`).then(fileContent => {
+    readFile(`../templates/${htmlFile}`).then(fileContent => {
         const filepath = `${folderPath}/${config.componentName}.html`;
         const renderedFile = mustache.render(fileContent, config);
         writeFile(filepath, renderedFile);
