@@ -3,10 +3,11 @@
 const fs = require('promised-io/fs');
 const Deferred = require('promised-io/promise').Deferred;
 const mustache = require('mustache');
+const checkConfig = require('./config-check');
 let deferred = null;
 
 module.exports = config => {
-    checkConfig(config);
+    checkConfig(['componentModelFolder', 'modelName'], config);
 
     deferred = new Deferred();
     const filename = `${config.modelName}.java`;
@@ -19,16 +20,6 @@ module.exports = config => {
 
     return deferred.promise;
 };
-
-function checkConfig(config) {
-    config = config || {};
-    if (!config.componentModelFolder) {
-        throw new Error('componentModelFolder is required!');
-    }
-    if (!config.modelName) {
-        throw new Error('modelName is required!');
-    }
-}
 
 function renderModelOnTemplate(model, file) {
     return mustache.render(file, model);

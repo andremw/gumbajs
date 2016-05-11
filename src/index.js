@@ -1,6 +1,6 @@
 'use strict';
 
-const createModel = require('./create-model.js');
+const createModel = require('./model-creator');
 
 module.exports = mainConfig => {
     checkConfig(mainConfig);
