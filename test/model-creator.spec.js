@@ -1,19 +1,24 @@
 'use strict';
 
 const fs = require('promised-io/fs');
-const rimraf = require('rimraf-promise');
 
 const tempWrite = require('temp-write');
 const test = require('ava').test;
+
 const generator = require('../src/');
 
+const dirhandler = require('./fixtures/dirhandler');
+
+const TEMP_FOLDER = './tmp';
+
 test.before('creates the /tmp folder', async () => {
-    await rimraf('./tmp');
-    await fs.mkdir('./tmp');
+    await dirhandler.createFolder(TEMP_FOLDER);
 });
 
 test('Fails without required config', async t => {
-    const gen = generator();
+    const gen = generator({
+        componentsFolderPath: 'not needed now'
+    });
     t.throws(() => {
         gen.createModel({
             modelName: 'whatever'
@@ -30,9 +35,11 @@ test('Fails without required config', async t => {
 test.serial('Creates model file', async t => {
     const expectedFilename = 'UnauthModel.java';
 
-    const gen = generator();
+    const gen = generator({
+        componentsFolderPath: 'not needed now'
+    });
     const tempFilepath = `.${tempWrite.sync('whatever')}`;
-    await fs.mkdir(tempFilepath);
+    await dirhandler.createFolder(tempFilepath);
 
     const options = {
         modelName: 'UnauthModel',
@@ -46,5 +53,9 @@ test.serial('Creates model file', async t => {
 });
 
 test.after('removes the /tmp folder', async () => {
-    await rimraf('./tmp');
+    // await removeTempFolder();
 });
+
+// function removeTempFolder() {
+//     return dirhandler.removeFolder(TEMP_FOLDER);
+// }
