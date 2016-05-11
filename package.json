@@ -28,6 +28,9 @@
     "tap-spec": "^4.1.1",
     "xo": "^0.15.0"
   },
+  "ava": {
+    "tap": true
+  },
   "xo": {
     "semicolon": true,
     "esnext": true,
