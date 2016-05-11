@@ -22,16 +22,23 @@ module.exports = config => {
 };
 
 function createBasicStructure(config) {
-    const basicFiles = ['.content.xml', '_cq_editConfig.xml', 'dialog.xml', `${config.componentName}.html`];
+    const xmlFiles = ['.content.xml', '_cq_editConfig.xml', 'dialog.xml', `${config.componentName}.html`];
+    const htmlFile = 'component.html';
     const folderName = config.componentName;
+    const folderPath = `${config.componentsFolderPath}/${folderName}/`;
 
-    basicFiles.forEach(basicFile => {
-        const filepath = `${config.componentsFolderPath}/${folderName}/${basicFile}`;
-
-        readFile(`../fileTemplates/${basicFile}`).then(fileContent => {
+    xmlFiles.forEach(xmlFile => {
+        readFile(`../fileTemplates/${xmlFile}`).then(fileContent => {
+            const filepath = `${folderPath}/${xmlFile}`;
             const renderedFile = mustache.render(fileContent, config);
-            fs.writeFile(filepath, renderedFile).then(resolve, reject);
+            writeFile(filepath, renderedFile);
         });
+    });
+
+    readFile(`../fileTemplates/${htmlFile}`).then(fileContent => {
+        const filepath = `${folderPath}/${config.componentName}.html`;
+        const renderedFile = mustache.render(fileContent, config);
+        writeFile(filepath, renderedFile);
     });
 }
 
@@ -52,6 +59,10 @@ function createFolder(folderName, componentsFolderPath) {
 
 function readFile(path) {
     return fs.readFile(path, 'utf-8');
+}
+
+function writeFile(path, content) {
+    fs.writeFile(path, content).then(resolve, reject);
 }
 
 function resolve() {
