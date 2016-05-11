@@ -2,7 +2,6 @@
 
 const fs = require('promised-io/fs');
 const rimraf = require('rimraf-promise');
-// const tempWrite = require('temp-write');
 
 module.exports.removeFolder = path => {
     const promise = new Promise((resolve, reject) => {
@@ -24,15 +23,6 @@ module.exports.removeFolder = path => {
 
 module.exports.createFolder = path => {
     const promise = new Promise((resolve, reject) => {
-        // if (temporary) {
-        //     path = tempWrite(new Date().toString());
-        //     fs.mkdir(path).then(() => {
-        //         resolve(path);
-        //     });
-        // } else {
-        //
-        // }
-
         folderExists(path).then(success, () => {
             fs.mkdir(path).then(success, error => {
                 reject(error);

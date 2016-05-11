@@ -7,7 +7,7 @@ const test = require('ava').test;
 
 const generator = require('../src/');
 
-const dirhandler = require('./fixtures/dirhandler');
+const dirhandler = require('../src/dirhandler');
 
 const TEMP_FOLDER = './tmp';
 

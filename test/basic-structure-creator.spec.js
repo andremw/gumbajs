@@ -5,7 +5,7 @@ const tempWrite = require('temp-write');
 const fs = require('promised-io/fs');
 
 const generator = require('../src/');
-const dirhandler = require('./fixtures/dirhandler');
+const dirhandler = require('../src/dirhandler');
 const TEMP_FOLDER = './tmp';
 let gen = null;
 
@@ -45,15 +45,10 @@ test.only.serial('Creates basic structure files', async t => {
     };
 
     await gen.basicStructure(options);
-    const filepath = `${folderPath}/${expectedFiles[0]}`;
-    const fileContent = await fs.readFile(filepath, 'utf-8');
-    t.true(fileContent !== '\n');
-    /*
+
     expectedFiles.forEach(async file => {
-        const filepath = `${folderPath}/${file}`;
-        console.log(`FILEPATH: ${filepath}`);
+        const filepath = `${folderPath}/${componentName}/${file}`;
         const fileContent = await fs.readFile(filepath, 'utf-8');
-        t.true(fileContent !== '\n');
+        t.true(fileContent !== '\n', `${file} was created successfully.`);
     });
-    */
 });
