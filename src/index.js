@@ -5,7 +5,7 @@ const basicStructureCreator = require('./basic-structure-creator');
 const configCheck = require('./config-check');
 
 module.exports = mainConfig => {
-    configCheck(['componentsFolderPath'], mainConfig);
+    configCheck(['componentsDirPath'], mainConfig);
 
     return {
         createModel: config => {

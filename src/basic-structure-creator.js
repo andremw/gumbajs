@@ -12,11 +12,13 @@ module.exports = config => {
 
     deferred = new Deferred();
 
-    createFolder(config.componentName, config.componentsFolderPath).then(() => {
-        createBasicStructure(config);
+    // creates the main component folder if it doesn't exist yet
+    createDir(config.componentsDirPath).then(() => {
+        const componentFolder = `${config.componentsDirPath}/${config.componentName}`;
+        createDir(componentFolder).then(() => {
+            createBasicStructure(config);
+        });
     });
-
-    createFolder('clientlibs', `${config.componentsFolderPath}/${config.componentName}`);
 
     return deferred.promise;
 };
@@ -25,7 +27,7 @@ function createBasicStructure(config) {
     const xmlFiles = ['.content.xml', '_cq_editConfig.xml', 'dialog.xml', `${config.componentName}.html`];
     const htmlFile = 'component.html';
     const folderName = config.componentName;
-    const folderPath = `${config.componentsFolderPath}/${folderName}/`;
+    const folderPath = `${config.componentsDirPath}/${folderName}/`;
 
     xmlFiles.forEach(xmlFile => {
         readFile(`../templates/${xmlFile}`).then(fileContent => {
@@ -42,10 +44,10 @@ function createBasicStructure(config) {
     });
 }
 
-function createFolder(folderName, componentsFolderPath) {
+function createDir(componentsDirPath) {
     const promise = new Promise((resolve, reject) => {
-        fs.access(componentsFolderPath, fs.F_OK).then(noop, () => {
-            fs.mkdir(componentsFolderPath).then(noop, error => {
+        fs.access(componentsDirPath, fs.F_OK).then(noop, () => {
+            fs.mkdir(componentsDirPath).then(noop, error => {
                 reject(error);
             });
         });

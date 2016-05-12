@@ -17,7 +17,7 @@ test.before('creates the /tmp folder', async () => {
 
 test('Fails without required config', async t => {
     const gen = generator({
-        componentsFolderPath: 'not needed now'
+        componentsDirPath: 'not needed now'
     });
     t.throws(() => {
         gen.createModel({
@@ -36,7 +36,7 @@ test.serial('Creates model file', async t => {
     const expectedFilename = 'UnauthModel.java';
 
     const gen = generator({
-        componentsFolderPath: 'not needed now'
+        componentsDirPath: 'not needed now'
     });
     const tempFilepath = `.${tempWrite.sync('whatever')}`;
     await dirhandler.createFolder(tempFilepath);
@@ -53,9 +53,5 @@ test.serial('Creates model file', async t => {
 });
 
 test.after('removes the /tmp folder', async () => {
-    // await removeTempFolder();
-});
 
-// function removeTempFolder() {
-//     return dirhandler.removeFolder(TEMP_FOLDER);
-// }
+});
