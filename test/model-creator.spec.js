@@ -1,18 +1,15 @@
 'use strict';
 
+const test = require('ava').test;
 const fs = require('promised-io/fs');
 
-const tempWrite = require('temp-write');
-const test = require('ava').test;
-
 const generator = require('../src/');
+const tempDirCreator = require('./fixtures/tempDirCreator');
 
-const dirhandler = require('../src/dirhandler');
-
-const TEMP_FOLDER = './tmp';
+let tempFilepath = null;
 
 test.before('creates the /tmp folder', async () => {
-    await dirhandler.createFolder(TEMP_FOLDER);
+    tempFilepath = await tempDirCreator();
 });
 
 test('Fails without required config', async t => {
@@ -38,8 +35,6 @@ test.serial('Creates model file', async t => {
     const gen = generator({
         componentsDirPath: 'not needed now'
     });
-    const tempFilepath = `.${tempWrite.sync('whatever')}`;
-    await dirhandler.createFolder(tempFilepath);
 
     const options = {
         modelName: 'UnauthModel',

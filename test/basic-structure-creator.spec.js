@@ -1,20 +1,17 @@
 'use strict';
 
 const test = require('ava').test;
-const tempWrite = require('temp-write');
 const fs = require('promised-io/fs');
 
 const generator = require('../src/');
-const dirhandler = require('../src/dirhandler');
-const TEMP_FOLDER = './tmp';
-let gen = null;
 
+const tempDirCreator = require('./fixtures/tempDirCreator');
+
+let gen = null;
 let dirPath = null;
 
 test.before(async () => {
-    dirPath = `.${tempWrite.sync('basicStructure')}`;
-    await dirhandler.createFolder(TEMP_FOLDER);
-    await fs.mkdir(dirPath);
+    dirPath = await tempDirCreator();
     gen = generator({
         componentsDirPath: dirPath
     });
