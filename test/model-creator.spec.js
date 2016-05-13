@@ -29,7 +29,7 @@ test('Fails without required config', async t => {
     });
 });
 
-test.serial('Creates model file', async t => {
+test('Creates model file', async t => {
     const expectedFilename = 'UnauthModel.java';
 
     const gen = generator({
