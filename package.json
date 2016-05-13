@@ -4,8 +4,7 @@
   "description": "Component code generator for projects done with AEM and Sightly.",
   "main": "index.js",
   "scripts": {
-    "test": "xo && ava | tap-notify | tap-spec",
-    "watch:test": "xo && ava --watch"
+    "test": "xo && ava | tap-notify | tap-spec"
   },
   "repository": {
     "type": "git",

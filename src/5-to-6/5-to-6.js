@@ -7,9 +7,8 @@ const parseModel = require('../helper/parse-model');
 const createModel = require('../model-creator');
 
 module.exports = config => {
+    configCheck(['contentComponentDir'], config);
     const promise = new Promise((resolve, reject) => {
-        configCheck(['contentComponentDir'], config);
-
         const componentDir = config.contentComponentDir;
         const dialogTabsDir = `${componentDir}/dialogTabs`;
 
