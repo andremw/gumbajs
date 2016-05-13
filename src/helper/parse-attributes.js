@@ -29,9 +29,11 @@ function handleName(name) {
 
 function handleType(type) {
     const typeReferences = {
-        textfield: 'string',
-        selection: 'string',
         colorfield: 'string',
+        pathfield: 'string',
+        selection: 'string',
+        textfield: 'string',
+        textarea: 'string',
         multifield: 'list'
     };
     return typeReferences[type] || '';
