@@ -31,7 +31,7 @@ test('Fails without required config', async t => {
     });
 });
 
-test.serial('Creates basic structure files', async t => {
+test('Creates basic structure files', async t => {
     const componentName = 'GiftGrid';
     const componentGroup = 'Marketing Services Components';
     const expectedFiles = ['.content.xml', '_cq_editConfig.xml', 'dialog.xml', `${componentName}.html`];
