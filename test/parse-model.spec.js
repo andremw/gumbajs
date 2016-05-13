@@ -11,7 +11,7 @@ test('throws an error when no object is passed', async t => {
     });
 });
 
-test('parse an object with one array of attributes', t => {
+test('parses an object with one array of attributes', t => {
     const expectedObj = [{
         defaultValue: '',
         name: 'googleMapsKey',
@@ -22,7 +22,7 @@ test('parse an object with one array of attributes', t => {
     t.deepEqual(actual, expectedObj);
 });
 
-test('parse an object with some arrays of attributes', t => {
+test('parses an object with some arrays of attributes', t => {
     const expectedObj = [{
         defaultValue: '',
         name: 'beverage',
@@ -48,7 +48,7 @@ test('parse an object with some arrays of attributes', t => {
     t.deepEqual(actual, expectedObj);
 });
 
-test('parse an object with some arrays of attributes nested within other arrays of attributes', t => {
+test('parses an object with some arrays of attributes nested within other arrays of attributes', t => {
     const expectedObj = [{
         defaultValue: '',
         name: 'googleMapsKey',
@@ -82,4 +82,8 @@ test('parse an object with some arrays of attributes nested within other arrays 
     }];
     const actual = parseModel(unparsedModels.bigModel);
     t.deepEqual(actual, expectedObj);
+});
+
+test.skip('parses a multifieldpanel', t => {
+    t.fail();
 });
