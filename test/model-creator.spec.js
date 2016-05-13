@@ -3,7 +3,7 @@
 const test = require('ava').test;
 const fs = require('promised-io/fs');
 
-const generator = require('../src/');
+const generator = require('../src/api');
 const tempDirCreator = require('./fixtures/tempDirCreator');
 
 let tempFilepath = null;

@@ -3,7 +3,7 @@
 const test = require('ava').test;
 
 const fiveTo6 = require('../src/5-to-6/5-to-6');
-const generator = require('../src/');
+const generator = require('../src/api');
 const tempDirCreator = require('./fixtures/tempDirCreator');
 const xmlDir = '../../komarketingservices/content/src/main/content/jcr_root/apps/marketingservices/components/productlocator';
 
