@@ -29,7 +29,7 @@
     "xo": "^0.15.0"
   },
   "ava": {
-    "tap": false
+    "tap": true
   },
   "xo": {
     "semicolon": true,
@@ -39,6 +39,7 @@
   "dependencies": {
     "mustache": "^2.2.1",
     "promised-io": "^0.3.5",
-    "temp-write": "^2.1.0"
+    "temp-write": "^2.1.0",
+    "xml2js": "^0.4.16"
   }
 }
