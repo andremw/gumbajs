@@ -46,8 +46,10 @@ test('allowBlank is parsed correctly', t => {
     t.is(actual.optional, false, expectedMsg(false, actual.optional));
 });
 
-test.skip('[xtype] multifield is parsed as list', t => {
-    t.pass();
+test('[xtype] multifield is parsed as list', t => {
+    commonObj.xtype = 'multifield';
+    const actual = parseAttribute(commonObj);
+    t.is(actual.type, 'list', expectedMsg('list', actual.type));
 });
 
 function expectedMsg(expected, actual) {
