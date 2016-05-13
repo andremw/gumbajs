@@ -2,7 +2,6 @@
 
 const createModel = require('./model-creator');
 const basicStructureCreator = require('./basic-structure-creator');
-const fiveTo6 = require('./5-to-6/5-to-6');
 const configCheck = require('./config-check');
 
 module.exports = mainConfig => {
@@ -14,9 +13,8 @@ module.exports = mainConfig => {
         },
         basicStructure: config => {
             return basicStructureCreator(Object.assign(config, mainConfig));
-        },
-        fiveTo6: config => {
-            return fiveTo6(Object.assign(config, mainConfig));
         }
     };
 };
+
+module.exports.fiveTo6 = require('./5-to-6/5-to-6');
