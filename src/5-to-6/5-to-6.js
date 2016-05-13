@@ -11,32 +11,26 @@ module.exports = config => {
         configCheck(['contentComponentDir'], config);
 
         const componentDir = config.contentComponentDir;
+        const dialogTabsDir = `${componentDir}/dialogTabs`;
 
-        fs.readdir(`${componentDir}/dialogTabs`).then(xmlFiles => {
-            xmlFiles = xmlFiles.filter(xmlFile => {
-                return xmlFile.charAt(0) !== '.';
-            }).forEach(xmlFile => {
-                readFile(`${componentDir}/dialogTabs/${xmlFile}`).then(content => {
+        fs.readdir(dialogTabsDir).then(xmlFiles => {
+            xmlFiles = xmlFiles.filter(filterXml).forEach(xmlFile => {
+                readFile(`${dialogTabsDir}/${xmlFile}`).then(content => {
                     parseXmlToJs(content, (err, result) => {
                         if (err) {
                             reject(err);
                         }
                         result = fixResult(result);
-                        const modelAttrs = parseModel(result).filter(attr => {
-                            return attr.type !== 'list';
-                        });
-
-                        const javaName = removeExtension(xmlFile);
-
+                        const modelAttrs = parseModel(result).filter(removeListAttrs);
+                        const modelName = capitalizeFirstLetter(removeExtension(xmlFile));
                         const options = {
-                            modelName: capitalizeFirstLetter(javaName),
+                            modelName,
                             componentModelFolder: config.componentName,
                             filepath: config.outputPath,
                             modelAttrs,
                             capitalize: () => {
                                 return (val, render) => {
-                                    const text = render(val);
-                                    return capitalizeFirstLetter(text);
+                                    return capitalizeFirstLetter(render(val));
                                 };
                             }
                         };
@@ -50,12 +44,20 @@ module.exports = config => {
     return promise;
 };
 
+function filterXml(xmlFile) {
+    return xmlFile.charAt(0) !== '.';
+}
+
 function readFile(path) {
     return fs.readFile(path, 'utf-8');
 }
 
 function fixResult(result) {
     return result['jcr:root'];
+}
+
+function removeListAttrs(attr) {
+    return attr.type !== 'list';
 }
 
 function removeExtension(string) {
