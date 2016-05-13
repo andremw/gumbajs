@@ -6,7 +6,7 @@ const test = require('ava').test;
 
 const generator = require('../src/');
 
-test('Fails without required config', async t => {
+test.skip('Fails without required config', async t => {
     t.throws(() => {
         generator();
     }, 'componentsDirPath is required!');
