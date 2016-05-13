@@ -5,13 +5,14 @@ module.exports = object => {
         throw new Error('You forgot to pass the object that must be parsed..');
     }
 
-    const parsedObject = {
+    const parsedAttribute = {
         defaultValue: handleDefaultValue(object.defaultValue),
         name: handleName(object.name),
-        type: handleType(object.xtype)
+        type: handleType(object.xtype),
+        optional: handleOptional(object.allowBlank)
     };
 
-    return parsedObject;
+    return parsedAttribute;
 };
 
 function handleDefaultValue(value) {
@@ -34,4 +35,10 @@ function handleType(type) {
         multifield: 'list'
     };
     return typeReferences[type] || '';
+}
+
+function handleOptional(allowBlank) {
+    allowBlank = allowBlank || '';
+    const parsedValue = allowBlank.replace('{Boolean}', '');
+    return parsedValue === 'true';
 }
