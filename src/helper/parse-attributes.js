@@ -38,7 +38,7 @@ function handleType(type) {
 }
 
 function handleOptional(allowBlank) {
-    allowBlank = allowBlank || '';
+    allowBlank = allowBlank || 'true';
     const parsedValue = allowBlank.replace('{Boolean}', '');
     return parsedValue === 'true';
 }
