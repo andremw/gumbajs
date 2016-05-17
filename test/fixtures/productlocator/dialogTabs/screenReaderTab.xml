@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+          jcr:primaryType="cq:Panel"
+          title="Screen Reader">
+    <items jcr:primaryType="cq:WidgetCollection">
+        <storeNameScreenReader
+            jcr:primaryType="cq:Widget"
+            fieldLabel="Store Name"
+            name="./storeNameScreenReader"
+            fieldDescription=""
+            allowBlank="true"
+            xtype="textfield"/>
+        <addressScreenReader
+            jcr:primaryType="cq:Widget"
+            fieldLabel="Address"
+            name="./addressScreenReader"
+            fieldDescription=""
+            allowBlank="true"
+            xtype="textfield"/>
+        <paginationScreenReader
+            jcr:primaryType="cq:Widget"
+            fieldLabel="Pagination"
+            name="./paginationScreenReader"
+            fieldDescription=""
+            allowBlank="true"
+            xtype="textfield"/>
+        <googleMapScreenReader
+            jcr:primaryType="cq:Widget"
+            fieldLabel="Google Map"
+            name="./googleMapScreenReader"
+            fieldDescription=""
+            allowBlank="true"
+            xtype="textfield"/>        
+    </items>
+</jcr:root>

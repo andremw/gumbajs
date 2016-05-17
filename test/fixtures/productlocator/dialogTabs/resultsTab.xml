@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+          jcr:primaryType="cq:Panel"
+          title="Results">
+    <items jcr:primaryType="cq:WidgetCollection">
+        <listBackgroundColor
+                jcr:primaryType="cq:Widget"
+                fieldLabel="List Background Color"
+                showHexValue="true"
+                fieldDescription="Select or enter color hex value. (e.g. E41E2B)."
+                name="./listBackgroundColor"
+                xtype="colorfield"/>
+        <title
+                jcr:primaryType="cq:Widget"
+                xtype="dialogfieldset"
+                padding="0px 5px 0px 10px"
+                title="Title Configuration">
+            <items jcr:primaryType="cq:WidgetCollection">        
+                <resultsTitle
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Title"
+                        name="./resultsTitle"
+                        fieldDescription=""
+                        allowBlank="true"
+                        xtype="textfield"/>
+                <resultsFontSize
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Size"
+                        name="./resultsFontSize"
+                        defaultValue="h1"
+                        type="select"
+                        width="50"
+                        xtype="selection">
+                    <options jcr:primaryType="cq:WidgetCollection">
+                        <h1
+                                jcr:primaryType="nt:unstructured"
+                                text="H1"
+                                value="h1"/>
+                        <h2
+                                jcr:primaryType="nt:unstructured"
+                                text="H2"
+                                value="h2"/>
+                        <h3
+                                jcr:primaryType="nt:unstructured"
+                                text="H3"
+                                value="h3"/>
+                        <h4
+                                jcr:primaryType="nt:unstructured"
+                                text="H4"
+                                value="h4"/>
+                        <h5
+                                jcr:primaryType="nt:unstructured"
+                                text="H5"
+                                value="h5"/>                        
+                        <h6
+                                jcr:primaryType="nt:unstructured"
+                                text="H6"
+                                value="h6"/>
+                    </options>
+                </resultsFontSize>
+                <resultsLabelColor
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Color"
+                        showHexValue="true"
+                        fieldDescription="Select or enter color hex value. (e.g. E41E2B)."
+                        name="./resultsLabelColor"
+                        xtype="colorfield"/>
+            </items>
+        </title>
+        <storeName
+            jcr:primaryType="cq:Widget"
+            xtype="dialogfieldset"
+            padding="0px 5px 0px 10px"
+            title="Store Name Configuration">
+            <items jcr:primaryType="cq:WidgetCollection">             
+                <storeNameFontSize
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Size"
+                        name="./storeNameFontSize"
+                        type="select"
+                        width="50"
+                        xtype="selection">
+                    <options jcr:primaryType="cq:WidgetCollection">
+                        <b1
+                                jcr:primaryType="nt:unstructured"
+                                text="B1"
+                                value="b1"/>
+                        <b2
+                                jcr:primaryType="nt:unstructured"
+                                text="B2"
+                                value="b2"/>
+                        <b3
+                                jcr:primaryType="nt:unstructured"
+                                text="B3"
+                                value="b3"/>
+                        <b4
+                                jcr:primaryType="nt:unstructured"
+                                text="B4"
+                                value="b4"/>
+                    </options>
+                </storeNameFontSize>
+                <storeNameColor
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Color"
+                        showHexValue="true"
+                        fieldDescription="Select or enter color hex value. (e.g. E41E2B)."
+                        name="./storeNameColor"
+                        xtype="colorfield"/>
+            </items>
+        </storeName>
+        <address
+            jcr:primaryType="cq:Widget"
+            xtype="dialogfieldset"
+            padding="0px 5px 0px 10px"
+            title="Address Configuration">
+            <items jcr:primaryType="cq:WidgetCollection">             
+                <addressFontSize
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Size"
+                        name="./addressFontSize"
+                        type="select"
+                        width="50"
+                        xtype="selection">
+                    <options jcr:primaryType="cq:WidgetCollection">
+                        <b1
+                                jcr:primaryType="nt:unstructured"
+                                text="B1"
+                                value="b1"/>
+                        <b2
+                                jcr:primaryType="nt:unstructured"
+                                text="B2"
+                                value="b2"/>
+                        <b3
+                                jcr:primaryType="nt:unstructured"
+                                text="B3"
+                                value="b3"/>
+                        <b4
+                                jcr:primaryType="nt:unstructured"
+                                text="B4"
+                                value="b4"/>
+                    </options>
+                </addressFontSize>
+                <addressColor
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Color"
+                        showHexValue="true"
+                        fieldDescription="Select or enter color hex value. (e.g. E41E2B)."
+                        name="./addressColor"
+                        xtype="colorfield"/>
+            </items>
+        </address>
+        <getDirections
+            jcr:primaryType="cq:Widget"
+            xtype="dialogfieldset"
+            padding="0px 5px 0px 10px"
+            title="Get Directions Configuration">
+            <items jcr:primaryType="cq:WidgetCollection">         
+                <getDirectionsText
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Get Directions Text"
+                        name="./getDirectionsText"
+                        fieldDescription=""
+                        allowBlank="true"
+                        xtype="textfield"/>
+                <getDirectionsFontSize
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Get Directions Font Size"
+                        name="./getDirectionsFontSize"
+                        type="select"
+                        width="50"
+                        xtype="selection">
+                    <options jcr:primaryType="cq:WidgetCollection">
+                        <b1
+                                jcr:primaryType="nt:unstructured"
+                                text="B1"
+                                value="b1"/>
+                        <b2
+                                jcr:primaryType="nt:unstructured"
+                                text="B2"
+                                value="b2"/>
+                        <b3
+                                jcr:primaryType="nt:unstructured"
+                                text="B3"
+                                value="b3"/>
+                        <b4
+                                jcr:primaryType="nt:unstructured"
+                                text="B4"
+                                value="b4"/>
+                    </options>
+                </getDirectionsFontSize>
+                <getDirectionsColor
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Get Directions Color"
+                        showHexValue="true"
+                        fieldDescription="Select or enter color hex value. (e.g. E41E2B)."
+                        name="./getDirectionsColor"
+                        xtype="colorfield"/>
+            </items>
+        </getDirections>
+        <pagination
+            jcr:primaryType="cq:Widget"
+            xtype="dialogfieldset"
+            padding="0px 5px 0px 10px"
+            title="Pagination Configuration">
+            <items jcr:primaryType="cq:WidgetCollection">
+                <paginationPreviousObjectId
+                        jcr:primaryType="cq:Widget"
+                        fieldDescription="ID used for tracking Previous Button clicks. Must be an alphanumeric string"
+                        fieldLabel="Object Id Previous Button"
+                        name="./paginationPreviousObjectId"
+                        defaultValue="previous-pag-button"
+                        allowBlank="true"
+                        xtype="textfield"/>
+                <paginationNextObjectId
+                        jcr:primaryType="cq:Widget"
+                        fieldDescription="ID used for tracking Next Button clicks. Must be an alphanumeric string"
+                        fieldLabel="Object Id Next Button"
+                        name="./paginationNextObjectId"
+                        defaultValue="next-pag-button"
+                        allowBlank="true"
+                        xtype="textfield"/>                
+                <paginationLabelPrevious
+                    jcr:primaryType="cq:Widget"
+                    fieldLabel="Label Previous"
+                    name="./paginationLabelPrevious"
+                    fieldDescription=""
+                    allowBlank="true"
+                    xtype="textfield"/>
+                <paginationLabelNext
+                    jcr:primaryType="cq:Widget"
+                    fieldLabel="Label Next"
+                    name="./paginationLabelNext"
+                    fieldDescription=""
+                    allowBlank="true"
+                    xtype="textfield"/>
+                <paginationLabelSize
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Size"
+                        name="./paginationLabelSize"
+                        type="select"
+                        width="50"
+                        xtype="selection">
+                    <options jcr:primaryType="cq:WidgetCollection">
+                        <b1
+                                jcr:primaryType="nt:unstructured"
+                                text="B1"
+                                value="b1"/>
+                        <b2
+                                jcr:primaryType="nt:unstructured"
+                                text="B2"
+                                value="b2"/>
+                        <b3
+                                jcr:primaryType="nt:unstructured"
+                                text="B3"
+                                value="b3"/>
+                        <b4
+                                jcr:primaryType="nt:unstructured"
+                                text="B4"
+                                value="b4"/>
+                    </options>
+                </paginationLabelSize>                
+                <paginationColor
+                    jcr:primaryType="cq:Widget"
+                    fieldLabel="Pagination Color"
+                    showHexValue="true"
+                    fieldDescription="Select or enter color hex value. (e.g. E41E2B)."
+                    name="./paginationColor"
+                    xtype="colorfield"/>
+            </items>
+        </pagination>
+        <iconMap
+            jcr:primaryType="cq:Widget"
+            xtype="dialogfieldset"
+            padding="0px 5px 0px 10px"
+            title="Icon Map Configuration">
+            <items jcr:primaryType="cq:WidgetCollection">
+                <iconMapBackgroundColor
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Icon Map Background Color"
+                        showHexValue="true"
+                        fieldDescription="Select or enter color hex value. (e.g. E41E2B)."
+                        name="./iconMapBackgroundColor"
+                        xtype="colorfield"/>
+                <iconMapFontColor
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Icon Map Font Color"
+                        showHexValue="true"
+                        fieldDescription="Select or enter color hex value. (e.g. E41E2B)."
+                        name="./iconMapFontColor"
+                        xtype="colorfield"/>
+            </items>
+        </iconMap>
+    </items>
+</jcr:root>

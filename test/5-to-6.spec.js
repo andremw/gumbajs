@@ -1,10 +1,11 @@
 'use strict';
 
 const test = require('ava').test;
+const fs = require('promised-io/fs');
 
 const fiveTo6 = require('../src/api').fiveTo6;
 const tempDirCreator = require('./fixtures/tempDirCreator');
-const xmlDir = '../../komarketingservices/content/src/main/content/jcr_root/apps/marketingservices/components/productlocator';
+const xmlDir = './fixtures/productlocator';
 
 let tempFilepath = null;
 
@@ -23,11 +24,17 @@ test('Fails without required config', t => {
 });
 
 test('creates model', async t => {
+    const expFolderName = 'productlocator';
+    const expectedFiles = ['BasicSettingsScreen.java', 'ContentTab.java', 'ErrorsTab.java', 'ResultsTab.java', 'ScreenReaderTab.java'];
+
     await fiveTo6({
         compDir: xmlDir,
-        componentName: 'productlocator',
         outputDir: tempFilepath
     });
 
-    t.pass();
+    expectedFiles.forEach(async file => {
+        const filepath = `${tempFilepath}/${expFolderName}/${file}`;
+        const fileContent = await fs.readFile(filepath, 'utf-8');
+        t.true(fileContent !== '\n', `${file} was created successfully.`);
+    });
 });
