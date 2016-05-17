@@ -7,11 +7,9 @@ const parseModel = require('../helper/parse-model');
 const createModel = require('../model-creator');
 
 module.exports = config => {
-    configCheck(['contentComponentDir'], config);
+    configCheck(['compDir', 'outputDir'], config);
+    const dialogTabsDir = `${config.compDir}/dialogTabs`;
     const promise = new Promise((resolve, reject) => {
-        const componentDir = config.contentComponentDir;
-        const dialogTabsDir = `${componentDir}/dialogTabs`;
-
         fs.readdir(dialogTabsDir).then(xmlFiles => {
             xmlFiles = xmlFiles.filter(filterXml).forEach(xmlFile => {
                 readFile(`${dialogTabsDir}/${xmlFile}`).then(content => {
@@ -22,10 +20,11 @@ module.exports = config => {
                         result = fixResult(result);
                         const modelAttrs = parseModel(result).filter(removeListAttrs);
                         const modelName = capitalizeFirstLetter(removeExtension(xmlFile));
+                        const componentModelFolder = config.compDir.substr(config.compDir.lastIndexOf('/') + 1);
                         const options = {
                             modelName,
-                            componentModelFolder: config.componentName,
-                            filepath: config.outputPath,
+                            componentModelFolder,
+                            filepath: config.outputDir,
                             modelAttrs,
                             capitalize: () => {
                                 return (val, render) => {
