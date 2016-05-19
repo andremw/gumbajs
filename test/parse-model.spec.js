@@ -5,7 +5,7 @@ const test = require('ava').test;
 const parseModel = require('../src/helper/parse-model');
 const unparsedModels = require('./fixtures/unparsedModels');
 
-test('throws an error when no object is passed', async t => {
+test('throws an error when no object is passed', t => {
     t.throws(() => {
         parseModel();
     });
