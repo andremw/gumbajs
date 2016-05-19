@@ -6,7 +6,7 @@ const fs = require('promised-io/fs');
 const generator = require('../src/api');
 const tempDirCreator = require('./fixtures/tempDirCreator');
 
-test('Fails without required config', async t => {
+test('Fails without required config', t => {
     const gen = generator({
         componentsDirPath: 'not needed now'
     });
