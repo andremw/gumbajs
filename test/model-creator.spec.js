@@ -6,12 +6,6 @@ const fs = require('promised-io/fs');
 const generator = require('../src/api');
 const tempDirCreator = require('./fixtures/tempDirCreator');
 
-let tempFilepath = null;
-
-test.before('creates the /tmp folder', async () => {
-    tempFilepath = await tempDirCreator();
-});
-
 test('Fails without required config', async t => {
     const gen = generator({
         componentsDirPath: 'not needed now'
@@ -30,6 +24,7 @@ test('Fails without required config', async t => {
 });
 
 test('Creates model file', async t => {
+    const tempFilepath = await tempDirCreator();
     const expectedFilename = 'UnauthModel.java';
 
     const gen = generator({
@@ -45,8 +40,4 @@ test('Creates model file', async t => {
     await gen.createModel(options);
     const file = await fs.readFile(`${tempFilepath}/${expectedFilename}`, 'utf-8');
     t.true(file !== '\n');
-});
-
-test.after('removes the /tmp folder', async () => {
-
 });
