@@ -17,7 +17,7 @@ test.before(async () => {
     });
 });
 
-test('Fails without required config', async t => {
+test('Fails without required config', t => {
     t.throws(() => {
         gen.basicStructure({
             componentName: 'whatever'
@@ -42,7 +42,6 @@ test('Creates basic structure files', async t => {
     };
 
     await gen.basicStructure(options);
-
     expectedFiles.forEach(async file => {
         const filepath = `${dirPath}/${componentName}/${file}`;
         const fileContent = await fs.readFile(filepath, 'utf-8');
