@@ -8,14 +8,14 @@ const dirhandler = require('../../src/dirhandler');
 const configCheck = require('../config-check');
 const parseModel = require('../helper/parse-model');
 const createModel = require('../model-creator');
-let createdCount = 0;
-let xmlFilesCount = 0;
 
 module.exports = config => {
     configCheck(['compDir', 'outputDir'], config);
     const dialogTabsDir = `${config.compDir}/dialogTabs`;
     const componentModelFolder = config.compDir.substr(config.compDir.lastIndexOf('/') + 1);
     const folderpath = `${config.outputDir}/${componentModelFolder}`;
+    let createdCount = 0;
+    let xmlFilesCount = 0;
 
     return new Promise((resolve, reject) => {
         dirhandler.createFolder(folderpath).then(() => {
