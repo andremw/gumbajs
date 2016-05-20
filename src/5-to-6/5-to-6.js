@@ -1,17 +1,29 @@
+'use strict';
+
 // const util = require('util');
 const fs = require('promised-io/fs');
 const parseXmlToJs = require('xml2js').parseString;
 
+const dirhandler = require('../../src/dirhandler');
 const configCheck = require('../config-check');
 const parseModel = require('../helper/parse-model');
 const createModel = require('../model-creator');
+let createdCount = 0;
+let xmlFilesCount = 0;
 
 module.exports = config => {
     configCheck(['compDir', 'outputDir'], config);
     const dialogTabsDir = `${config.compDir}/dialogTabs`;
-    const promise = new Promise((resolve, reject) => {
-        fs.readdir(dialogTabsDir).then(xmlFiles => {
-            xmlFiles = xmlFiles.filter(filterXml).forEach(xmlFile => {
+    const componentModelFolder = config.compDir.substr(config.compDir.lastIndexOf('/') + 1);
+    const folderpath = `${config.outputDir}/${componentModelFolder}`;
+
+    return new Promise((resolve, reject) => {
+        dirhandler.createFolder(folderpath).then(() => {
+            return fs.readdir(dialogTabsDir);
+        }).then(xmlFiles => {
+            const filteredXmlFiles = xmlFiles.filter(filterXml);
+            xmlFilesCount = filteredXmlFiles.length;
+            filteredXmlFiles.forEach(xmlFile => {
                 readFile(`${dialogTabsDir}/${xmlFile}`).then(content => {
                     parseXmlToJs(content, (err, result) => {
                         if (err) {
@@ -20,11 +32,10 @@ module.exports = config => {
                         result = fixResult(result);
                         const modelAttrs = parseModel(result).filter(removeListAttrs);
                         const modelName = capitalizeFirstLetter(removeExtension(xmlFile));
-                        const componentModelFolder = config.compDir.substr(config.compDir.lastIndexOf('/') + 1);
                         const options = {
                             modelName,
                             componentModelFolder,
-                            filepath: config.outputDir,
+                            filepath: folderpath,
                             modelAttrs,
                             capitalize: () => {
                                 return (val, render) => {
@@ -33,13 +44,17 @@ module.exports = config => {
                             }
                         };
 
-                        createModel(options).then(resolve, reject);
+                        createModel(options).then(() => {
+                            createdCount++;
+                            if (createdCount === xmlFilesCount) {
+                                resolve();
+                            }
+                        }, reject);
                     });
                 }, reject);
             });
         });
     });
-    return promise;
 };
 
 function filterXml(xmlFile) {
