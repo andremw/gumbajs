@@ -31,17 +31,11 @@ module.exports = config => {
                         }
                         result = fixResult(result);
                         const modelAttrs = parseModel(result).filter(removeListAttrs);
-                        const modelName = capitalizeFirstLetter(removeExtension(xmlFile));
                         const options = {
-                            modelName,
+                            modelName: xmlFile,
                             componentModelFolder,
                             filepath: folderpath,
-                            modelAttrs,
-                            capitalize: () => {
-                                return (val, render) => {
-                                    return capitalizeFirstLetter(render(val));
-                                };
-                            }
+                            modelAttrs
                         };
 
                         createModel(options).then(() => {
@@ -71,14 +65,6 @@ function fixResult(result) {
 
 function removeListAttrs(attr) {
     return attr.type !== 'list';
-}
-
-function removeExtension(string) {
-    return string.replace('.xml', '');
-}
-
-function capitalizeFirstLetter(string) {
-    return `${string.charAt(0).toUpperCase()}${string.slice(1)}`;
 }
 
 // function inspect(data) {
