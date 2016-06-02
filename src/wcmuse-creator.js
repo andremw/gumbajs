@@ -9,6 +9,12 @@ module.exports = function wcmuseCreator(config) {
     const fileName = `${config.componentModelFolder}.java`;
     const filePath = `${config.filepath}/${fileName}`;
 
+    config.lowerCaseFirstLetter = () => {
+        return (val, render) => {
+            return lowerCaseFirstLetter(render(val));
+        };
+    };
+
     return fs.readFile('../templates/wcmuse.java', 'utf-8').then(file => {
         const renderedFile = renderModelOnTemplate(config, file);
         return fs.writeFile(filePath, renderedFile);
@@ -17,4 +23,8 @@ module.exports = function wcmuseCreator(config) {
 
 function renderModelOnTemplate(model, file) {
     return mustache.render(file, model);
+}
+
+function lowerCaseFirstLetter(string) {
+    return `${string.charAt(0).toLowerCase()}${string.slice(1)}`;
 }
