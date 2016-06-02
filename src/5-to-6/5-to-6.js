@@ -4,6 +4,7 @@
 const fs = require('promised-io/fs');
 const parseXmlToJs = require('xml2js').parseString;
 
+const capitalizeFirstLetter = require('../helper/capitalize-first-letter');
 const dirhandler = require('../../src/dirhandler');
 const configCheck = require('../config-check');
 const parseModel = require('../helper/parse-model');
@@ -14,7 +15,7 @@ module.exports = config => {
     const dialogTabsDir = `${config.compDir}/dialogTabs`;
     const componentModelFolder = config.compDir.substr(config.compDir.lastIndexOf('/') + 1);
     const folderpath = `${config.outputDir}/${componentModelFolder}`;
-    let createdCount = 0;
+    const createdModels = [];
     let xmlFilesCount = 0;
 
     return new Promise((resolve, reject) => {
@@ -31,17 +32,18 @@ module.exports = config => {
                         }
                         result = fixResult(result);
                         const modelAttrs = parseModel(result).filter(removeListAttrs);
+                        const modelName = capitalizeFirstLetter(removeExtension(xmlFile));
                         const options = {
                             packageName: config.packageName,
-                            modelName: xmlFile,
+                            modelName,
                             componentModelFolder,
                             filepath: folderpath,
                             modelAttrs
                         };
 
                         createModel(options).then(() => {
-                            createdCount++;
-                            if (createdCount === xmlFilesCount) {
+                            createdModels.push(modelName);
+                            if (createdModels.length === xmlFilesCount) {
                                 resolve();
                             }
                         }, reject);
@@ -66,6 +68,10 @@ function fixResult(result) {
 
 function removeListAttrs(attr) {
     return attr.type !== 'list';
+}
+
+function removeExtension(string) {
+    return string.replace('.xml', '');
 }
 
 // function inspect(data) {
