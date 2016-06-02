@@ -10,7 +10,7 @@ const parseModel = require('../helper/parse-model');
 const createModel = require('../model-creator');
 
 module.exports = config => {
-    configCheck(['compDir', 'outputDir'], config);
+    configCheck(['compDir', 'outputDir', 'packageName'], config);
     const dialogTabsDir = `${config.compDir}/dialogTabs`;
     const componentModelFolder = config.compDir.substr(config.compDir.lastIndexOf('/') + 1);
     const folderpath = `${config.outputDir}/${componentModelFolder}`;

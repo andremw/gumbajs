@@ -1,6 +1,5 @@
-package com.tccc.marketingservices.components.model.{{componentModelFolder}};
+package com.tccc.{{packageName}}.components.model.{{componentModelFolder}};
 
-import com.tccc.marketingservices.utils.StyleBuilder;
 import org.apache.commons.lang.StringUtils;
 import org.apache.sling.models.annotations.Default;
 import org.apache.sling.models.annotations.Model;
@@ -29,7 +28,6 @@ public class {{modelName}} {
     }
 
     {{/modelAttrs}}
-    // configure the stylebuilder if needed
 
     @PostConstruct
     public void activate() {

@@ -29,7 +29,8 @@ test('creates model', async t => {
 
     await fiveTo6({
         compDir: xmlDir,
-        outputDir: tempFilepath
+        outputDir: tempFilepath,
+        packageName: 'marketingservices'
     });
 
     expectedFiles.forEach(async file => {
