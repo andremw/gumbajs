@@ -22,7 +22,7 @@ module.exports = config => {
         dirhandler.createFolder(folderpath).then(() => {
             return fs.readdir(dialogTabsDir);
         }).then(xmlFiles => {
-            const filteredXmlFiles = xmlFiles.filter(filterXml);
+            const filteredXmlFiles = xmlFiles.filter(filterDotfiles);
             xmlFilesCount = filteredXmlFiles.length;
             filteredXmlFiles.forEach(xmlFile => {
                 readFile(`${dialogTabsDir}/${xmlFile}`).then(content => {
@@ -54,7 +54,7 @@ module.exports = config => {
     });
 };
 
-function filterXml(xmlFile) {
+function filterDotfiles(xmlFile) {
     return xmlFile.charAt(0) !== '.';
 }
 
