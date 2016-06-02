@@ -6,7 +6,7 @@ const checkConfig = require('./config-check');
 const capitalizeFirstLetter = require('./helper/capitalize-first-letter');
 
 module.exports = config => {
-    checkConfig(['componentModelFolder', 'modelName', 'modelAttrs'], config);
+    checkConfig(['componentModelFolder', 'modelName', 'modelAttrs', 'filepath'], config);
     const filename = `${config.modelName}.java`;
     const filepath = `${config.filepath}/${filename}`;
 
