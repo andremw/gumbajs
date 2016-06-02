@@ -6,7 +6,7 @@ const fs = require('promised-io/fs');
 const wcmuseCreator = require('../src/wcmuse-creator');
 const tempDirCreator = require('./fixtures/tempDirCreator');
 
-test.only('Fails without required config', t => {
+test('Fails without required config', t => {
     t.throws(() => {
         wcmuseCreator();
     }, 'packageName is required!');
@@ -33,7 +33,7 @@ test.only('Fails without required config', t => {
     }, 'models is required!');
 });
 
-test.only('Creates WCMuse', async t => {
+test('Creates WCMuse', async t => {
     const tempFilepath = await tempDirCreator();
     const expectedFilename = 'MyWCMUse.java';
 
