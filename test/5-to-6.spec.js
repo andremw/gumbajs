@@ -23,19 +23,24 @@ test('Fails without required config', t => {
     });
 });
 
-test('creates model', async t => {
+test('creates model and wcmuse', async t => {
     const expFolderName = 'productlocator';
-    const expectedFiles = ['BasicSettingsScreen.java', 'ContentTab.java', 'ErrorsTab.java', 'ResultsTab.java', 'ScreenReaderTab.java'];
+    const expectedModelFiles = ['BasicSettingsScreen.java', 'ContentTab.java', 'ErrorsTab.java', 'ResultsTab.java', 'ScreenReaderTab.java'];
 
     await fiveTo6({
         compDir: xmlDir,
         outputDir: tempFilepath,
-        packageName: 'marketingservices'
+        packageName: 'marketingservices',
+        controllerName: 'Productlocator'
     });
 
-    expectedFiles.forEach(async file => {
+    expectedModelFiles.forEach(async file => {
         const filepath = `${tempFilepath}/${expFolderName}/${file}`;
         const fileContent = await fs.readFile(filepath, 'utf-8');
         t.true(fileContent !== '\n', `${file} was created successfully.`);
+    });
+
+    fs.readFile(`${tempFilepath}/Productlocator.java}`).then(content => {
+        t.true(content !== '\n');
     });
 });

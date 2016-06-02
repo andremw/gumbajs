@@ -9,17 +9,18 @@ const dirhandler = require('../../src/dirhandler');
 const configCheck = require('../config-check');
 const parseModel = require('../helper/parse-model');
 const createModel = require('../model-creator');
+const wcmuseCreator = require('../wcmuse-creator');
 
 module.exports = config => {
     configCheck(['compDir', 'outputDir', 'packageName'], config);
     const dialogTabsDir = `${config.compDir}/dialogTabs`;
     const componentModelFolder = config.compDir.substr(config.compDir.lastIndexOf('/') + 1);
-    const folderpath = `${config.outputDir}/${componentModelFolder}`;
+    const modelFolderpath = `${config.outputDir}/${componentModelFolder}`;
     const createdModels = [];
     let xmlFilesCount = 0;
 
     return new Promise((resolve, reject) => {
-        dirhandler.createFolder(folderpath).then(() => {
+        dirhandler.createFolder(modelFolderpath).then(() => {
             return fs.readdir(dialogTabsDir);
         }).then(xmlFiles => {
             const filteredXmlFiles = xmlFiles.filter(filterDotfiles);
@@ -37,7 +38,7 @@ module.exports = config => {
                             packageName: config.packageName,
                             modelName,
                             componentModelFolder,
-                            filepath: folderpath,
+                            filepath: modelFolderpath,
                             modelAttrs
                         };
 
@@ -51,6 +52,15 @@ module.exports = config => {
                 }, reject);
             });
         });
+    }).then(() => {
+        const options = {
+            packageName: config.packageName,
+            componentModelFolder,
+            controllerName: config.controllerName,
+            models: createdModels,
+            filepath: config.outputDir
+        };
+        return wcmuseCreator(options);
     });
 };
 
