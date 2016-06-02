@@ -32,6 +32,7 @@ module.exports = config => {
                         result = fixResult(result);
                         const modelAttrs = parseModel(result).filter(removeListAttrs);
                         const options = {
+                            packageName: config.packageName,
                             modelName: xmlFile,
                             componentModelFolder,
                             filepath: folderpath,
