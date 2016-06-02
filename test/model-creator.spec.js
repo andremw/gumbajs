@@ -35,7 +35,8 @@ test('Creates model file', async t => {
         modelName: 'UnauthModel',
         componentModelFolder: 'unauthModel',
         filepath: tempFilepath,
-        modelAttrs: []
+        modelAttrs: [],
+        packageName: 'marketingservices'
     };
 
     await gen.createModel(options);
