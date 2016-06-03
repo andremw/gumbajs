@@ -1,14 +1,12 @@
-# Project Name
+# Gumba
 
-TODO: Write a project description
+Migrating AEM code from JSP to Sightly is error-prone, boring and time consuming. So is creating new components. That's why I created this code generator to make the developers' life easier.
 
 ## Installation
 
-TODO: Describe the installation process
+Add Gumbajs to your project by running `npm install gumbajs`
 
-## Usage
-
-TODO: Write usage instructions
+## API
 
 ## Contributing
 
@@ -18,14 +16,6 @@ TODO: Write usage instructions
 4. Push to the branch: `git push origin my-new-feature`
 5. Submit a pull request :D
 
-## History
-
-TODO: Write history
-
-## Credits
-
-TODO: Write credits
-
 ## License
 
-TODO: Write license
+MIT
