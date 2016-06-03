@@ -1,14 +1,14 @@
 {
-  "name": "kogenerator",
+  "name": "GumbaJS",
   "version": "0.0.1",
   "description": "Component code generator for projects done with AEM and Sightly.",
-  "main": "index.js",
+  "main": "./src/api.js",
   "scripts": {
     "test": "xo && ava | tap-notify | tap-spec"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://andremw_cit@bitbucket.org/andremw_cit/kogenerator.git"
+    "url": "git+https://github.com/andremw/gumbajs.git"
   },
   "keywords": [
     "aem",
@@ -19,7 +19,7 @@
   ],
   "author": "andremw",
   "license": "MIT",
-  "homepage": "https://bitbucket.org/andremw_cit/kogenerator#readme",
+  "homepage": "https://github.com/andremw/gumbajs",
   "devDependencies": {
     "ava": "^0.14.0",
     "rimraf-promise": "^2.0.0",
