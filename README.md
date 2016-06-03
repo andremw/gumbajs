@@ -1,4 +1,4 @@
-# Gumba
+# GumbaJS
 
 Migrating AEM code from JSP to Sightly is error-prone, boring and time consuming. So is creating new components. That's why I created this code generator to make the developers' life easier.
 
