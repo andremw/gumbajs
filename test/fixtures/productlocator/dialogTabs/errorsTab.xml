@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+          jcr:primaryType="cq:Panel"
+          title="Errors">
+    <items jcr:primaryType="cq:WidgetCollection">
+        <message
+            jcr:primaryType="cq:Widget"
+            xtype="dialogfieldset"
+            padding="0px 5px 0px 10px"
+            title="Message Configuration">
+            <items jcr:primaryType="cq:WidgetCollection">        
+                <errorMessageColor
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Error Message Color"
+                        showHexValue="true"
+                        fieldDescription="Select or enter color hex value. (e.g. E41E2B)."
+                        name="./errorMessageColor"
+                        xtype="colorfield"/>
+                <errorMessageBackgroundColor
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Error Message Background Color"
+                        showHexValue="true"
+                        fieldDescription="Select or enter color hex value. (e.g. E41E2B)."
+                        name="./errorMessageBackgroundColor"
+                        xtype="colorfield"/>
+                <errorMessageLineColor
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Error Message Line Color"
+                        showHexValue="true"
+                        fieldDescription="Select or enter color hex value. (e.g. E41E2B)."
+                        name="./errorMessageLineColor"
+                        xtype="colorfield"/>
+                <zeroResultsMessage
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Zero Results Message"
+                        name="./zeroResultsMessage"
+                        fieldDescription="The message to be displayed when the search has returned zero results"
+                        allowBlank="false"
+                        xtype="textfield"/>
+                <serviceErrorMsg
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Service Error Message"
+                        name="./serviceErrorMsg"
+                        fieldDescription="The message to be displayed when the service returns an error"
+                        allowBlank="false"
+                        xtype="textfield"/>
+            </items>
+        </message>
+    </items>
+</jcr:root>

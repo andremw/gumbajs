@@ -1,62 +1,59 @@
 'use strict';
 
 const fs = require('promised-io/fs');
-const Deferred = require('promised-io/promise').Deferred;
 const mustache = require('mustache');
 const configCheck = require('./config-check');
-
-let deferred = null;
 
 module.exports = config => {
     configCheck(['componentName', 'componentGroup'], config);
 
-    deferred = new Deferred();
-
     // creates the main component folder if it doesn't exist yet
-    createDir(config.componentsDirPath).then(() => {
+    return createDir(config.componentsDirPath).then(() => {
         const componentFolder = `${config.componentsDirPath}/${config.componentName}`;
-        createDir(componentFolder).then(() => {
-            createBasicStructure(config);
-        });
+        return createDir(componentFolder);
+    }).then(() => {
+        return createBasicStructure(config);
     });
-
-    return deferred.promise;
 };
 
 function createBasicStructure(config) {
-    const xmlFiles = ['.content.xml', '_cq_editConfig.xml', 'dialog.xml', `${config.componentName}.html`];
-    const htmlFile = 'component.html';
-    const folderName = config.componentName;
-    const folderPath = `${config.componentsDirPath}/${folderName}/`;
+    return new Promise((resolve, reject) => {
+        const xmlFiles = ['.content.xml', '_cq_editConfig.xml', 'dialog.xml'];
+        const htmlFile = 'component.html';
+        const folderName = config.componentName;
+        const folderPath = `${config.componentsDirPath}/${folderName}/`;
+        let count = 0;
 
-    xmlFiles.forEach(xmlFile => {
-        readFile(`../templates/${xmlFile}`).then(fileContent => {
-            const filepath = `${folderPath}/${xmlFile}`;
-            const renderedFile = mustache.render(fileContent, config);
-            writeFile(filepath, renderedFile);
+        xmlFiles.forEach(xmlFile => {
+            readFile(`../templates/${xmlFile}`).then(fileContent => {
+                const filepath = `${folderPath}/${xmlFile}`;
+                const renderedFile = mustache.render(fileContent, config);
+                return writeFile(filepath, renderedFile);
+            }).then(() => {
+                count++;
+                if (count === 4) {
+                    resolve();
+                }
+            }, reject);
         });
-    });
 
-    readFile(`../templates/${htmlFile}`).then(fileContent => {
-        const filepath = `${folderPath}/${config.componentName}.html`;
-        const renderedFile = mustache.render(fileContent, config);
-        writeFile(filepath, renderedFile);
+        readFile(`../templates/${htmlFile}`).then(fileContent => {
+            const filepath = `${folderPath}/${config.componentName}.html`;
+            const renderedFile = mustache.render(fileContent, config);
+            return writeFile(filepath, renderedFile);
+        }).then(() => {
+            count++;
+            if (count === 4) {
+                resolve();
+            }
+        }, reject);
     });
 }
 
 function createDir(componentsDirPath) {
-    const promise = new Promise((resolve, reject) => {
-        fs.access(componentsDirPath, fs.F_OK).then(noop, () => {
-            fs.mkdir(componentsDirPath).then(noop, error => {
-                reject(error);
-            });
-        });
-
-        function noop() {
-            resolve();
-        }
+    return fs.access(componentsDirPath, fs.F_OK).then(null, () => {
+        return fs.mkdir(componentsDirPath);
     });
-    return promise;
 }
 
 function readFile(path) {
@@ -64,13 +61,5 @@ function readFile(path) {
 }
 
 function writeFile(path, content) {
-    fs.writeFile(path, content).then(resolve, reject);
-}
-
-function resolve() {
-    deferred.resolve();
-}
-
-function reject(error) {
-    deferred.reject(error);
+    return fs.writeFile(path, content);
 }

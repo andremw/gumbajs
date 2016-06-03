@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+          jcr:primaryType="cq:Panel"
+          title="Content">
+    <items jcr:primaryType="cq:WidgetCollection">
+        <BackgroundProductLocatorColor
+                jcr:primaryType="cq:Widget"
+                fieldLabel="Product Locator Background Color"
+                showHexValue="true"
+                fieldDescription="Select or enter color hex value. (e.g. E41E2B)."
+                name="./backgroundProductLocatorColor"
+                xtype="colorfield"/>
+        <lineColor
+                jcr:primaryType="cq:Widget"
+                fieldLabel="Line Color"
+                showHexValue="true"
+                fieldDescription="Select or enter color hex value. (e.g. E41E2B)."
+                name="./lineColor"
+                xtype="colorfield"/>
+        <title
+                jcr:primaryType="cq:Widget"
+                xtype="dialogfieldset"
+                padding="0px 5px 0px 10px"
+                title="Title Configuration">
+            <items jcr:primaryType="cq:WidgetCollection">
+                <titleProductLocator
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Title"
+                        name="./titleProductLocator"
+                        fieldDescription=""
+                        allowBlank="true"
+                        xtype="textfield"/>
+                <titleProductLocatorSize
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Size"
+                        name="./titleProductLocatorSize"
+                        type="select"
+                        width="50"
+                        xtype="selection">
+                    <options jcr:primaryType="cq:WidgetCollection">
+                        <h1
+                                jcr:primaryType="nt:unstructured"
+                                text="H1"
+                                value="h1"/>
+                        <h2
+                                jcr:primaryType="nt:unstructured"
+                                text="H2"
+                                value="h2"/>
+                        <h3
+                                jcr:primaryType="nt:unstructured"
+                                text="H3"
+                                value="h3"/>
+                        <h4
+                                jcr:primaryType="nt:unstructured"
+                                text="H4"
+                                value="h4"/>
+                        <h5
+                                jcr:primaryType="nt:unstructured"
+                                text="H5"
+                                value="h5"/>                        
+                        <h6
+                                jcr:primaryType="nt:unstructured"
+                                text="H6"
+                                value="h6"/>
+                    </options>
+                </titleProductLocatorSize>
+                <titleProductLocatorColor
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Color"
+                        showHexValue="true"
+                        fieldDescription="Select or enter color hex value. (e.g. E41E2B)."
+                        name="./titleProductLocatorColor"
+                        xtype="colorfield"/>
+            </items>
+        </title>
+        <productList
+                jcr:primaryType="cq:Widget"
+                xtype="dialogfieldset"
+                padding="0px 5px 0px 10px"
+                title="Product List Configuration">
+            <items jcr:primaryType="cq:WidgetCollection">
+                <labelProductList
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Label Text"
+                        name="./labelProductList"
+                        fieldDescription=""
+                        allowBlank="false"
+                        xtype="textfield"/>
+                <labelProductListSize
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Label Size"
+                        name="./labelProductListSize"
+                        type="select"
+                        width="50"
+                        xtype="selection">
+                    <options jcr:primaryType="cq:WidgetCollection">
+                        <b1
+                                jcr:primaryType="nt:unstructured"
+                                text="B1"
+                                value="b1"/>
+                        <b2
+                                jcr:primaryType="nt:unstructured"
+                                text="B2"
+                                value="b2"/>
+                        <b3
+                                jcr:primaryType="nt:unstructured"
+                                text="B3"
+                                value="b3"/>
+                        <b4
+                                jcr:primaryType="nt:unstructured"
+                                text="B4"
+                                value="b4"/>
+                    </options>
+                </labelProductListSize>
+                <labelProductListColor
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Label Color"
+                        showHexValue="true"
+                        fieldDescription="Select or enter color hex value. (e.g. E41E2B)."
+                        name="./labelProductListColor"
+                        xtype="colorfield"/>
+            </items>
+        </productList>
+        <dropdownProductLocator
+                jcr:primaryType="cq:Widget"
+                xtype="dialogfieldset"
+                padding="0px 5px 0px 10px"
+                title="DropDown Configuration">
+            <items jcr:primaryType="cq:WidgetCollection">
+                <dropdownProductLocatorColor
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Inner Text Color"
+                        showHexValue="true"
+                        fieldDescription="Select or enter color hex value. (e.g. E41E2B)."
+                        name="./dropdownProductLocatorColor"
+                        xtype="colorfield"/>
+                <dropdownProductLocatorRightSideColor
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Right Side Box Color"
+                        showHexValue="true"
+                        fieldDescription="Select or enter color hex value. (e.g. E41E2B)."
+                        name="./dropdownProductLocatorRightSideColor"
+                        xtype="colorfield"/>
+                <dropdownProductLocatorArrowColor
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Arrow Color"
+                        showHexValue="true"
+                        fieldDescription="Select or enter color hex value. (e.g. E41E2B)."
+                        name="./dropdownProductLocatorArrowColor"
+                        xtype="colorfield"/>                
+            </items>
+        </dropdownProductLocator>
+        <zipCode
+                jcr:primaryType="cq:Widget"
+                xtype="dialogfieldset"
+                padding="0px 5px 0px 10px"
+                title="Zipcode Configuration">
+            <items jcr:primaryType="cq:WidgetCollection">
+                <labelZipCode
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Label Text"
+                        name="./labelZipCode"
+                        fieldDescription=""
+                        allowBlank="false"
+                        xtype="textfield"/>
+                <labelZipCodeSize
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Label Size"
+                        name="./labelZipCodeSize"
+                        type="select"
+                        width="50"
+                        xtype="selection">
+                    <options jcr:primaryType="cq:WidgetCollection">
+                        <b1
+                                jcr:primaryType="nt:unstructured"
+                                text="B1"
+                                value="b1"/>
+                        <b2
+                                jcr:primaryType="nt:unstructured"
+                                text="B2"
+                                value="b2"/>
+                        <b3
+                                jcr:primaryType="nt:unstructured"
+                                text="B3"
+                                value="b3"/>
+                        <b4
+                                jcr:primaryType="nt:unstructured"
+                                text="B4"
+                                value="b4"/>
+                    </options>
+                </labelZipCodeSize>
+                <labelZipCodeColor
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Label Color"
+                        showHexValue="true"
+                        fieldDescription="Select or enter color hex value. (e.g. E41E2B)."
+                        name="./labelZipCodeColor"
+                        xtype="colorfield"/>
+                <innerTextZipCodeColor
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Inner Text Color"
+                        showHexValue="true"
+                        fieldDescription="Select or enter color hex value. (e.g. E41E2B)."
+                        name="./innerTextZipCodeColor"
+                        xtype="colorfield"/>
+                <zipCodeRequiredErrorMsg
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Zip Code Required Error Message"
+                        name="./zipCodeRequiredErrorMsg"
+                        fieldDescription="Required error message for zipcode"
+                        allowBlank="false"
+                        xtype="textfield"/>
+                <zipCodeInvalidErrorMsg
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Zip Code Invalid Error Message"
+                        name="./zipCodeInvalidErrorMsg"
+                        fieldDescription="Invalid error message for zipcode"
+                        allowBlank="false"
+                        xtype="textfield"/>
+                <zipCodeErrorBorderInput
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Zip Code Error Border Input"
+                        showHexValue="true"
+                        fieldDescription="Select or enter color hex value. (e.g. E41E2B)."
+                        name="./zipCodeErrorBorderInput"
+                        xtype="colorfield"/>
+                <zipCodeErrorMessageColor
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Zip Code Error Message Color"
+                        showHexValue="true"
+                        fieldDescription="Select or enter color hex value. (e.g. E41E2B)."
+                        name="./zipCodeErrorMessageColor"
+                        xtype="colorfield"/>
+            </items>
+        </zipCode>
+
+        <distance
+                jcr:primaryType="cq:Widget"
+                xtype="dialogfieldset"
+                padding="0px 5px 0px 10px"
+                title="Distance Configuration">
+            <items jcr:primaryType="cq:WidgetCollection">
+                <labelDistance
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Label Text"
+                        name="./labelDistance"
+                        fieldDescription=""
+                        allowBlank="false"
+                        xtype="textfield"/>
+                <labelDistanceSize
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Label Size"
+                        name="./labelDistanceSize"
+                        type="select"
+                        width="50"
+                        xtype="selection">
+                    <options jcr:primaryType="cq:WidgetCollection">
+                        <b1
+                                jcr:primaryType="nt:unstructured"
+                                text="B1"
+                                value="b1"/>
+                        <b2
+                                jcr:primaryType="nt:unstructured"
+                                text="B2"
+                                value="b2"/>
+                        <b3
+                                jcr:primaryType="nt:unstructured"
+                                text="B3"
+                                value="b3"/>
+                        <b4
+                                jcr:primaryType="nt:unstructured"
+                                text="B4"
+                                value="b4"/>
+                    </options>
+                </labelDistanceSize>
+                <labelDistanceColor
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Label Color"
+                        showHexValue="true"
+                        fieldDescription="Select or enter color hex value. (e.g. E41E2B)."
+                        name="./labelDistanceColor"
+                        xtype="colorfield"/>
+                <itemDistanceMap
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Custom Distance"
+                        fieldDescription="Enter the values that will appear on the Distance dropdown"
+                        name="./itemDistanceMap"
+                        xtype="multifield">
+                    <fieldConfig
+                            jcr:primaryType="cq:Widget"
+                            xtype="multifieldpanel">
+                        <items jcr:primaryType="cq:WidgetCollection">
+                            <itemDistance
+                                    jcr:primaryType="cq:Widget"
+                                    fieldLabel="Value"
+                                    key="itemDistance"
+                                    width="250"
+                                    xtype="textfield"/>
+                        </items>
+                    </fieldConfig>
+                </itemDistanceMap>
+
+            </items>
+        </distance>
+        <searchButton
+                jcr:primaryType="cq:Widget"
+                xtype="dialogfieldset"
+                padding="0px 5px 0px 10px"
+                title="Search Button Configuration">
+            <items jcr:primaryType="cq:WidgetCollection">
+                <searchButtonText
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Label Text"
+                        name="./searchButtonText"
+                        allowBlank="false"
+                        xtype="textfield"/>
+                <searchButtonLabelColor
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Label Font Color"
+                        showHexValue="true"
+                        fieldDescription="Select or enter color hex value. (e.g. E41E2B)."
+                        name="./searchButtonLabelColor"
+                        xtype="colorfield"/>
+                <searchButtonColor
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Background Color"
+                        showHexValue="true"
+                        fieldDescription="Select or enter color hex value. (e.g. E41E2B)."
+                        name="./searchButtonColor"
+                        xtype="colorfield"/>
+                <searchButtonAlign
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Button Alignment"
+                        name="./searchButtonAlign"
+                        type="select"
+                        width="50"
+                        xtype="selection">
+                    <options jcr:primaryType="cq:WidgetCollection">
+                        <left
+                                jcr:primaryType="nt:unstructured"
+                                text="Left"
+                                value="left"/>
+                        <center
+                                jcr:primaryType="nt:unstructured"
+                                text="Center"
+                                value="center"/>
+                        <right
+                                jcr:primaryType="nt:unstructured"
+                                text="Right"
+                                value="right"/>
+                    </options>
+                </searchButtonAlign>
+                <searchButtonSize
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Label Button Size"
+                        name="./searchButtonSize"
+                        type="select"
+                        width="50"
+                        xtype="selection">
+                    <options jcr:primaryType="cq:WidgetCollection">
+                        <b1
+                                jcr:primaryType="nt:unstructured"
+                                text="B1"
+                                value="b1"/>
+                        <b2
+                                jcr:primaryType="nt:unstructured"
+                                text="B2"
+                                value="b2"/>
+                        <b3
+                                jcr:primaryType="nt:unstructured"
+                                text="B3"
+                                value="b3"/>
+                        <b4
+                                jcr:primaryType="nt:unstructured"
+                                text="B4"
+                                value="b4"/>
+                    </options>
+                </searchButtonSize>                
+                <searchButtonPadding
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Button Size"
+                        fieldDescription="How to fill this field (e.g. 15px 10px 15px 10px - top right bottom left). Distance between content and border of the element."
+                        name="./searchButtonPadding"
+                        xtype="textfield"/>
+                <searchButtonObjectId
+                        jcr:primaryType="cq:Widget"
+                        fieldDescription="ID used for tracking Search Button clicks. Must be an alphanumeric string"
+                        fieldLabel="Object Id"
+                        name="./searchButtonObjectId"
+                        defaultValue="search-button"
+                        allowBlank="true"
+                        xtype="textfield"/>
+            </items>
+        </searchButton>
+    </items>
+</jcr:root>

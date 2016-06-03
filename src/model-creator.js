@@ -1,34 +1,27 @@
 'use strict';
 
 const fs = require('promised-io/fs');
-const Deferred = require('promised-io/promise').Deferred;
 const mustache = require('mustache');
 const checkConfig = require('./config-check');
-let deferred = null;
+const capitalizeFirstLetter = require('./helper/capitalize-first-letter');
 
 module.exports = config => {
-    checkConfig(['componentModelFolder', 'modelName'], config);
-
-    deferred = new Deferred();
+    checkConfig(['componentModelFolder', 'modelName', 'modelAttrs', 'filepath', 'packageName'], config);
     const filename = `${config.modelName}.java`;
     const filepath = `${config.filepath}/${filename}`;
 
-    fs.readFile(`../templates/model.java`, 'utf-8').then(file => {
-        const renderedFile = renderModelOnTemplate(config, file);
-        fs.writeFile(filepath, renderedFile).then(resolve, reject);
-    }, reject);
+    config.capitalize = () => {
+        return (val, render) => {
+            return capitalizeFirstLetter(render(val));
+        };
+    };
 
-    return deferred.promise;
+    return fs.readFile(`../templates/model.java`, 'utf-8').then(file => {
+        const renderedFile = renderModelOnTemplate(config, file);
+        return fs.writeFile(filepath, renderedFile);
+    });
 };
 
 function renderModelOnTemplate(model, file) {
     return mustache.render(file, model);
-}
-
-function resolve() {
-    deferred.resolve();
-}
-
-function reject(error) {
-    deferred.reject(error);
 }

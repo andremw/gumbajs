@@ -22,19 +22,9 @@ module.exports.removeFolder = path => {
 };
 
 module.exports.createFolder = path => {
-    const promise = new Promise((resolve, reject) => {
-        folderExists(path).then(success, () => {
-            fs.mkdir(path).then(success, error => {
-                reject(error);
-            });
-        });
-
-        // called if folder already exists or if it was created successfully
-        function success() {
-            resolve();
-        }
+    return folderExists(path).then(null, () => {
+        return fs.mkdir(path);
     });
-    return promise;
 };
 
 function folderExists(path) {

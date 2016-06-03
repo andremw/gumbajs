@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+          jcr:primaryType="cq:Panel"
+          title="Basic Settings">
+    <items jcr:primaryType="cq:WidgetCollection">
+        <programName
+                    jcr:primaryType="cq:Widget"
+                    path="/apps/marketingservices/components/base/base_dialog/items/programName.infinity.json"
+                    xtype="cqinclude"/>
+        <googleMapsKey
+                jcr:primaryType="cq:Widget"
+                fieldLabel="Google Maps Key"
+                name="./googleMapsKey"
+                fieldDescription="The API key for Google Maps"
+                allowBlank="false"
+                xtype="textfield"/>
+        <productLocatorApiClientID
+                jcr:primaryType="cq:Widget"
+                fieldLabel="Product Locator API Client ID"
+                name="./productLocatorApiClientID"
+                fieldDescription="The Client ID for the Product Locator API"
+                allowBlank="false"
+                xtype="textfield">
+            <listeners
+                    jcr:primaryType="nt:unstructured"
+                    change="
+                            function(box, value, oldValue) {
+                                ProductLocatorUtil.updateBeverageList(box, value);
+                            }"
+                    loadcontent="
+                        function(box, record, path) {
+                            ProductLocatorUtil.updateBeverageList(box, record.data.productLocatorApiClientID, record.data.beverage);
+                        }"
+            />
+        </productLocatorApiClientID>
+        <selectProduct
+                jcr:primaryType="cq:Widget"
+                xtype="dialogfieldset"
+                padding="0px 5px 0px 10px"
+                title="Select Product Configuration">
+            <items jcr:primaryType="cq:WidgetCollection">
+                <beverageList
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Beverage"
+                        fieldDescription="Select the Beverage Value. This field may take a while to load, please wait."
+                        name="./beverage"
+                        type="select"
+                        width="50"
+                        xtype="selection"
+                        allowBlank="false">
+                    <listeners
+                            jcr:primaryType="nt:unstructured"
+                            selectionchanged="
+                                    function(box, value) {
+                                        ProductLocatorUtil.updateBrandList(box, value);
+                                    }"
+                            loadcontent="
+                                function(box, record, path) {
+                                    ProductLocatorUtil.updateBrandList(box, record.data.beverage, record.data.brand);
+                                }"
+
+                    />
+                </beverageList>
+                <brandList
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Brand"
+                        fieldDescription="Select the Brand Value. This field may take a while to load, please wait."
+                        name="./brand"
+                        type="select"
+                        width="50"
+                        xtype="selection"
+                        allowBlank="false">
+                    <listeners
+                            jcr:primaryType="nt:unstructured"
+                            selectionchanged="
+                                    function(box, value) {
+                                        ProductLocatorUtil.updateProductList(box, value);
+                                    }"
+                            loadcontent="
+                                function(box, record, path) {
+                                    ProductLocatorUtil.updateProductList(box, record.data.brand, record.data.beverage, record.data.product);
+                                }"
+                    />
+                </brandList>
+                <productList
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Product"
+                        fieldDescription="If the author chooses one product, only one option will appear on the product locator screen."
+                        name="./product"
+                        type="select"
+                        width="50"
+                        xtype="selection">
+                    <listeners
+                            jcr:primaryType="nt:unstructured"
+                            selectionchanged="
+                                    function(box, value) {
+                                        ProductLocatorUtil.showHideProductListCheckbox(box, value);
+                                    }"
+                    />
+                </productList>
+                <hideProductDropdown
+                        jcr:primaryType="cq:Widget"
+                        defaultValue="{Boolean}false"
+                        type="checkbox"
+                        xtype="selection"
+                        inputValue="yes"
+                        name="./hideProductDropdown"
+                        fieldLabel="Hide Product List"
+                        fieldDescription="If checked, the product list will not be visible. The search will always be performed using the selected product."/>
+            </items>
+        </selectProduct>
+    </items>
+</jcr:root>

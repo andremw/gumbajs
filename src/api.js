@@ -16,3 +16,5 @@ module.exports = mainConfig => {
         }
     };
 };
+
+module.exports.fiveTo6 = require('./5-to-6/5-to-6');
