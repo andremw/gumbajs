@@ -1,5 +1,5 @@
 {
-  "name": "GumbaJS",
+  "name": "gumbajs",
   "version": "0.0.1",
   "description": "Component code generator for projects done with AEM and Sightly.",
   "main": "./src/api.js",
@@ -22,7 +22,6 @@
   "homepage": "https://github.com/andremw/gumbajs",
   "devDependencies": {
     "ava": "^0.14.0",
-    "rimraf-promise": "^2.0.0",
     "tap-notify": "^1.0.0",
     "tap-spec": "^4.1.1",
     "xo": "^0.15.0"
@@ -39,6 +38,7 @@
     "mustache": "^2.2.1",
     "promised-io": "^0.3.5",
     "temp-write": "^2.1.0",
-    "xml2js": "^0.4.16"
+    "xml2js": "^0.4.16",
+    "rimraf-promise": "^2.0.0"
   }
 }
