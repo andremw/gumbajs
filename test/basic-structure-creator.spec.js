@@ -5,7 +5,7 @@ const fs = require('promised-io/fs');
 
 const generator = require('../src/api');
 
-const tempDirCreator = require('./fixtures/tempDirCreator');
+const tempDirCreator = require('./fixtures/temp-dir-creator');
 
 let gen = null;
 let dirPath = null;

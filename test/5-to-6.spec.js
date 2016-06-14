@@ -4,7 +4,7 @@ const test = require('ava').test;
 const fs = require('promised-io/fs');
 
 const fiveTo6 = require('../src/api').fiveTo6;
-const tempDirCreator = require('./fixtures/tempDirCreator');
+const tempDirCreator = require('./fixtures/temp-dir-creator');
 const xmlDir = './fixtures/productlocator';
 
 let tempFilepath = null;

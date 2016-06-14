@@ -4,7 +4,7 @@ const test = require('ava').test;
 const fs = require('promised-io/fs');
 
 const generator = require('../src/api');
-const tempDirCreator = require('./fixtures/tempDirCreator');
+const tempDirCreator = require('./fixtures/temp-dir-creator');
 
 test('Fails without required config', t => {
     const gen = generator({
