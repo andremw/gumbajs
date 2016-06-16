@@ -16,15 +16,12 @@ module.exports = function wcmuseCreator(config) {
         };
     };
 
-    return fs.readFile('../templates/wcmuse.java', 'utf-8').then(file => {
-        const renderedFile = renderModelOnTemplate(config, file);
+    return fs.readFile('../templates/wcmuse.java', 'utf-8')
+    .then(file => mustache.render(file, config))
+    .then(renderedFile => {
         return fs.writeFile(filepath, renderedFile);
     });
 };
-
-function renderModelOnTemplate(model, file) {
-    return mustache.render(file, model);
-}
 
 function lowerCaseFirstLetter(string) {
     return `${string.charAt(0).toLowerCase()}${string.slice(1)}`;

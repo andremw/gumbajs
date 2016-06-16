@@ -8,12 +8,8 @@ module.exports = mainConfig => {
     configCheck(['componentsDirPath'], mainConfig);
 
     return {
-        createModel: config => {
-            return createModel(Object.assign(config, mainConfig));
-        },
-        basicStructure: config => {
-            return basicStructureCreator(Object.assign(config, mainConfig));
-        }
+        createModel: config => createModel(Object.assign(config, mainConfig)),
+        basicStructure: config => basicStructureCreator(Object.assign(config, mainConfig))
     };
 };
 

@@ -6,14 +6,12 @@ const configCheck = require('./config-check');
 
 module.exports = config => {
     configCheck(['componentName', 'componentGroup'], config);
+    const componentFolder = `${config.componentsDirPath}/${config.componentName}`;
 
     // creates the main component folder if it doesn't exist yet
-    return createDir(config.componentsDirPath).then(() => {
-        const componentFolder = `${config.componentsDirPath}/${config.componentName}`;
-        return createDir(componentFolder);
-    }).then(() => {
-        return createBasicStructure(config);
-    });
+    return createDir(config.componentsDirPath)
+    .then(() => createDir(componentFolder))
+    .then(() => createBasicStructure(config));
 };
 
 function createBasicStructure(config) {
@@ -51,9 +49,8 @@ function createBasicStructure(config) {
 }
 
 function createDir(componentsDirPath) {
-    return fs.access(componentsDirPath, fs.F_OK).then(null, () => {
-        return fs.mkdir(componentsDirPath);
-    });
+    return fs.access(componentsDirPath, fs.F_OK)
+    .then(null, () => fs.mkdir(componentsDirPath));
 }
 
 function readFile(path) {

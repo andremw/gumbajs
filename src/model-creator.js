@@ -16,12 +16,7 @@ module.exports = config => {
         };
     };
 
-    return fs.readFile(`../templates/model.java`, 'utf-8').then(file => {
-        const renderedFile = renderModelOnTemplate(config, file);
-        return fs.writeFile(filepath, renderedFile);
-    });
+    return fs.readFile(`../templates/model.java`, 'utf-8')
+    .then(file => mustache.render(file, config))
+    .then(renderedFile => fs.writeFile(filepath, renderedFile));
 };
-
-function renderModelOnTemplate(model, file) {
-    return mustache.render(file, model);
-}
