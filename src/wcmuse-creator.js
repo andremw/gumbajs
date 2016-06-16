@@ -18,9 +18,7 @@ module.exports = function wcmuseCreator(config) {
 
     return fs.readFile('../templates/wcmuse.java', 'utf-8')
     .then(file => mustache.render(file, config))
-    .then(renderedFile => {
-        return fs.writeFile(filepath, renderedFile);
-    });
+    .then(renderedFile => fs.writeFile(filepath, renderedFile));
 };
 
 function lowerCaseFirstLetter(string) {

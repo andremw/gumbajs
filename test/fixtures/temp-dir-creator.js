@@ -7,10 +7,8 @@ const dirhandler = require('../../src/dirhandler');
 const TEMP_FOLDER = './tmp';
 
 module.exports = () => {
-    return new Promise(resolve => {
-        const dirPath = `.${tempWrite.sync(new Date().toString())}`;
-        dirhandler.createFolder(TEMP_FOLDER)
+    const dirPath = `.${tempWrite.sync(new Date().toString())}`;
+    return dirhandler.createFolder(TEMP_FOLDER)
         .then(() => fs.mkdir(dirPath))
-        .then(() => resolve(dirPath));
-    });
+        .then(() => Promise.resolve(dirPath));
 };

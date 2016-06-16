@@ -14,6 +14,11 @@ module.exports = config => {
     .then(() => createBasicStructure(config));
 };
 
+function createDir(componentsDirPath) {
+    return fs.access(componentsDirPath, fs.F_OK)
+    .then(null, () => fs.mkdir(componentsDirPath));
+}
+
 function createBasicStructure(config) {
     return new Promise((resolve, reject) => {
         const xmlFiles = ['.content.xml', '_cq_editConfig.xml', 'dialog.xml'];
@@ -23,11 +28,11 @@ function createBasicStructure(config) {
         let count = 0;
 
         xmlFiles.forEach(xmlFile => {
-            readFile(`../templates/${xmlFile}`).then(fileContent => {
-                const filepath = `${folderPath}/${xmlFile}`;
-                const renderedFile = mustache.render(fileContent, config);
-                return writeFile(filepath, renderedFile);
-            }).then(() => {
+            const filepath = mountFilePath(folderPath, xmlFile);
+            readFile(`../templates/${xmlFile}`)
+            .then(fileContent => mustache.render(fileContent, config))
+            .then(renderedFile => writeFile(filepath, renderedFile))
+            .then(() => {
                 count++;
                 if (count === 4) {
                     resolve();
@@ -35,11 +40,11 @@ function createBasicStructure(config) {
             }, reject);
         });
 
-        readFile(`../templates/${htmlFile}`).then(fileContent => {
-            const filepath = `${folderPath}/${config.componentName}.html`;
-            const renderedFile = mustache.render(fileContent, config);
-            return writeFile(filepath, renderedFile);
-        }).then(() => {
+        const filepath = `${mountFilePath(folderPath, config.componentName)}.html`;
+        readFile(`../templates/${htmlFile}`)
+        .then(fileContent => mustache.render(fileContent, config))
+        .then(renderedFile => writeFile(filepath, renderedFile))
+        .then(() => {
             count++;
             if (count === 4) {
                 resolve();
@@ -48,9 +53,8 @@ function createBasicStructure(config) {
     });
 }
 
-function createDir(componentsDirPath) {
-    return fs.access(componentsDirPath, fs.F_OK)
-    .then(null, () => fs.mkdir(componentsDirPath));
+function mountFilePath(folderPath, resource) {
+    return `${folderPath}/${resource}`;
 }
 
 function readFile(path) {
