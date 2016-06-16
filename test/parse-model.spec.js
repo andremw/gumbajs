@@ -3,7 +3,7 @@
 const test = require('ava').test;
 
 const parseModel = require('../src/helper/parse-model');
-const unparsedModels = require('./fixtures/unparsedModels');
+const unparsedModels = require('./fixtures/unparsed-models');
 
 test('throws an error when no object is passed', t => {
     t.throws(() => {
