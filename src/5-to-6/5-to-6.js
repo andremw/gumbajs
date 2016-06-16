@@ -2,7 +2,7 @@
 
 // const util = require('util');
 const fs = require('promised-io/fs');
-const parseXmlToJs = require('xml2js').parseString;
+const parseString = require('xml2js').parseString;
 
 const capitalizeFirstLetter = require('../helper/capitalize-first-letter');
 const dirhandler = require('../../src/dirhandler');
@@ -19,37 +19,34 @@ module.exports = config => {
     const createdModels = [];
     let xmlFilesCount = 0;
 
-    return new Promise((resolve, reject) => {
-        dirhandler.createFolder(modelFolderpath).then(() => {
-            return fs.readdir(dialogTabsDir);
-        }).then(xmlFiles => {
-            const filteredXmlFiles = xmlFiles.filter(filterDotfiles);
+    return new Promise(resolve => {
+        dirhandler.createFolder(modelFolderpath)
+        .then(() => fs.readdir(dialogTabsDir))
+        .then(xmlFiles => xmlFiles.filter(filterDotfiles))
+        .then(filteredXmlFiles => {
             xmlFilesCount = filteredXmlFiles.length;
             filteredXmlFiles.forEach(xmlFile => {
-                readFile(`${dialogTabsDir}/${xmlFile}`).then(content => {
-                    parseXmlToJs(content, (err, result) => {
-                        if (err) {
-                            reject(err);
-                        }
-                        result = fixResult(result);
-                        const modelAttrs = parseModel(result).filter(removeListAttrs);
-                        const modelName = capitalizeFirstLetter(removeExtension(xmlFile));
-                        const options = {
-                            packageName: config.packageName,
-                            modelName,
-                            componentModelFolder,
-                            filepath: modelFolderpath,
-                            modelAttrs
-                        };
+                readFile(`${dialogTabsDir}/${xmlFile}`)
+                .then(content => parseXmlToJs(content))
+                .then(result => fixResult(result))
+                .then(result => {
+                    const modelAttrs = parseModel(result).filter(removeListAttrs);
+                    const modelName = capitalizeFirstLetter(removeExtension(xmlFile));
+                    const options = {
+                        packageName: config.packageName,
+                        modelName,
+                        componentModelFolder,
+                        filepath: modelFolderpath,
+                        modelAttrs
+                    };
 
-                        createModel(options).then(() => {
-                            createdModels.push(modelName);
-                            if (createdModels.length === xmlFilesCount) {
-                                resolve();
-                            }
-                        }, reject);
+                    createModel(options).then(() => {
+                        createdModels.push(modelName);
+                        if (createdModels.length === xmlFilesCount) {
+                            resolve();
+                        }
                     });
-                }, reject);
+                });
             });
         });
     }).then(() => {
@@ -87,3 +84,14 @@ function removeExtension(string) {
 // function inspect(data) {
 //     console.log(require('util').inspect(data, {depth: null}));
 // }
+
+function parseXmlToJs(content) {
+    return new Promise((resolve, reject) => {
+        parseString(content, (err, result) => {
+            if (err) {
+                return reject(err);
+            }
+            resolve(result);
+        });
+    });
+}
