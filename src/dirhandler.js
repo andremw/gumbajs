@@ -4,16 +4,8 @@ const fs = require('promised-io/fs');
 const rimraf = require('rimraf-promise');
 
 module.exports.removeFolder = path => {
-    return new Promise((resolve, reject) => {
-        folderExists(path).then(found, notFound);
-
-        function found() {
-            rimraf(path).then(resolve, reject);
-        }
-
-        function notFound() {
-            resolve();
-        }
+    return new Promise(resolve => {
+        folderExists(path).then(rimraf(path), resolve);
     });
 };
 
