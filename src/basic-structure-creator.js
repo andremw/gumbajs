@@ -48,7 +48,7 @@ function createBasicStructure(config) {
 function createDir(componentsDirPath) {
     return Promise.resolve()
     .then(() => fs.access(componentsDirPath, fs.F_OK))
-    .then(null, () => fs.mkdir(componentsDirPath));
+    .catch(() => fs.mkdir(componentsDirPath));
 }
 
 function readFile(path) {

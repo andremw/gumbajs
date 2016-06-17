@@ -8,7 +8,7 @@ module.exports.removeFolder = path => {
 };
 
 module.exports.createFolder = path => {
-    return folderExists(path).then(null, () => fs.mkdir(path));
+    return folderExists(path).catch(() => fs.mkdir(path));
 };
 
 function folderExists(path) {
