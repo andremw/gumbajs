@@ -1,1 +1,13 @@
-<sly data-sly-include="../base/init.html"/>
+<div data-sly-use.wcmuse="com.tccc.{{packageName}}.components.{{controllerName}}">
+    {{#models}}
+    <sly data-sly-test.{{modelName}}="${ {{controllerName}}.{{modelName}} }"/>
+
+    <h1>{{modelName}}</h1>
+    <ul>
+        {{#modelAttrs}}
+        <li><b>{{name}}:</b> {{modelName}}.{{name}}</li>
+        {{/modelAttrs}}
+    </ul>
+
+    {{/models}}
+</div>
