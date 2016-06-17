@@ -9,52 +9,44 @@ module.exports = config => {
     const componentFolder = `${config.componentsDirPath}/${config.componentName}`;
 
     // creates the main component folder if it doesn't exist yet
-    return createDir(config.componentsDirPath)
+    return Promise.resolve()
+    .then(() => createDir(config.componentsDirPath))
     .then(() => createDir(componentFolder))
     .then(() => createBasicStructure(config));
 };
 
+function createBasicStructure(config) {
+    let sequence = Promise.resolve();
+
+    const xmlFiles = ['.content.xml', '_cq_editConfig.xml', 'dialog.xml'];
+    const htmlFile = 'component.html';
+    const folderName = config.componentName;
+    const folderPath = `${config.componentsDirPath}/${folderName}/`;
+
+    sequence = sequence.then(() => {
+        return readFile(`../templates/${htmlFile}`).then(fileContent => {
+            const renderedFile = mustache.render(fileContent, config);
+            const filepath = `${folderPath}/${config.componentName}.html`;
+            return writeFile(filepath, renderedFile);
+        });
+    });
+
+    xmlFiles.forEach(xmlFile => {
+        sequence = sequence.then(() => {
+            return readFile(`../templates/${xmlFile}`).then(fileContent => {
+                const renderedFile = mustache.render(fileContent, config);
+                const filepath = `${folderPath}/${xmlFile}`;
+                return writeFile(filepath, renderedFile);
+            });
+        });
+    });
+
+    return sequence;
+}
+
 function createDir(componentsDirPath) {
     return fs.access(componentsDirPath, fs.F_OK)
     .then(null, () => fs.mkdir(componentsDirPath));
-}
-
-function createBasicStructure(config) {
-    return new Promise((resolve, reject) => {
-        const xmlFiles = ['.content.xml', '_cq_editConfig.xml', 'dialog.xml'];
-        const htmlFile = 'component.html';
-        const folderName = config.componentName;
-        const folderPath = `${config.componentsDirPath}/${folderName}/`;
-        let count = 0;
-
-        xmlFiles.forEach(xmlFile => {
-            const filepath = mountFilePath(folderPath, xmlFile);
-            readFile(`../templates/${xmlFile}`)
-            .then(fileContent => mustache.render(fileContent, config))
-            .then(renderedFile => writeFile(filepath, renderedFile))
-            .then(() => {
-                count++;
-                if (count === 4) {
-                    resolve();
-                }
-            }, reject);
-        });
-
-        const filepath = `${mountFilePath(folderPath, config.componentName)}.html`;
-        readFile(`../templates/${htmlFile}`)
-        .then(fileContent => mustache.render(fileContent, config))
-        .then(renderedFile => writeFile(filepath, renderedFile))
-        .then(() => {
-            count++;
-            if (count === 4) {
-                resolve();
-            }
-        }, reject);
-    });
-}
-
-function mountFilePath(folderPath, resource) {
-    return `${folderPath}/${resource}`;
 }
 
 function readFile(path) {
