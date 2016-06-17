@@ -17,38 +17,36 @@ module.exports = config => {
     const componentModelFolder = config.compDir.substr(config.compDir.lastIndexOf('/') + 1);
     const modelFolderpath = `${config.outputDir}/${componentModelFolder}`;
     const createdModels = [];
-    let xmlFilesCount = 0;
 
-    return new Promise(resolve => {
-        dirhandler.createFolder(modelFolderpath)
-        .then(() => fs.readdir(dialogTabsDir))
-        .then(xmlFiles => xmlFiles.filter(filterDotfiles))
-        .then(filteredXmlFiles => {
-            xmlFilesCount = filteredXmlFiles.length;
-            filteredXmlFiles.forEach(xmlFile => {
-                readFile(`${dialogTabsDir}/${xmlFile}`)
-                .then(content => parseXmlToJs(content))
-                .then(result => fixResult(result))
-                .then(result => {
-                    const modelAttrs = parseModel(result).filter(removeListAttrs);
-                    const modelName = capitalizeFirstLetter(removeExtension(xmlFile));
-                    const options = {
-                        packageName: config.packageName,
-                        modelName,
-                        componentModelFolder,
-                        filepath: modelFolderpath,
-                        modelAttrs
-                    };
+    const sequence = Promise.resolve()
+    .then(() => dirhandler.createFolder(modelFolderpath))
+    .then(() => fs.readdir(dialogTabsDir))
+    .then(xmlFiles => xmlFiles.filter(filterDotfiles))
+    .then(filteredXmlFiles => {
+        const promises = [];
+        filteredXmlFiles.forEach(xmlFile => {
+            const promise = Promise.resolve()
+            .then(() => readFile(`${dialogTabsDir}/${xmlFile}`))
+            .then(content => parseXmlToJs(content))
+            .then(result => fixResult(result))
+            .then(result => {
+                const modelAttrs = parseModel(result).filter(removeListAttrs);
+                const modelName = capitalizeFirstLetter(removeExtension(xmlFile));
+                const options = {
+                    packageName: config.packageName,
+                    modelName,
+                    componentModelFolder,
+                    filepath: modelFolderpath,
+                    modelAttrs
+                };
 
-                    createModel(options).then(() => {
-                        createdModels.push(modelName);
-                        if (createdModels.length === xmlFilesCount) {
-                            resolve();
-                        }
-                    });
+                return createModel(options).then(() => {
+                    createdModels.push(modelName);
                 });
             });
+            promises.push(promise);
         });
+        return Promise.all(promises);
     }).then(() => {
         const options = {
             packageName: config.packageName,
@@ -59,6 +57,8 @@ module.exports = config => {
         };
         return wcmuseCreator(options);
     });
+
+    return sequence;
 };
 
 function filterDotfiles(xmlFile) {
