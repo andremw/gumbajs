@@ -4,9 +4,7 @@ const fs = require('promised-io/fs');
 const rimraf = require('rimraf-promise');
 
 module.exports.removeFolder = path => {
-    return new Promise(resolve => {
-        folderExists(path).then(rimraf(path), resolve);
-    });
+    return folderExists(path).then(rimraf(path));
 };
 
 module.exports.createFolder = path => {
@@ -14,5 +12,5 @@ module.exports.createFolder = path => {
 };
 
 function folderExists(path) {
-    return fs.access(path, fs.F_OK);
+    return Promise.resolve().then(() => fs.access(path, fs.F_OK));
 }

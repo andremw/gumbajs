@@ -46,14 +46,15 @@ function createBasicStructure(config) {
 }
 
 function createDir(componentsDirPath) {
-    return fs.access(componentsDirPath, fs.F_OK)
+    return Promise.resolve()
+    .then(() => fs.access(componentsDirPath, fs.F_OK))
     .then(null, () => fs.mkdir(componentsDirPath));
 }
 
 function readFile(path) {
-    return fs.readFile(path, 'utf-8');
+    return Promise.resolve().then(() => fs.readFile(path, 'utf-8'));
 }
 
 function writeFile(path, content) {
-    return fs.writeFile(path, content);
+    return Promise.resolve().then(() => fs.writeFile(path, content));
 }

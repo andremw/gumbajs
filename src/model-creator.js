@@ -16,7 +16,8 @@ module.exports = config => {
         };
     };
 
-    return fs.readFile(`../templates/model.java`, 'utf-8')
+    return Promise.resolve()
+    .then(() => fs.readFile(`../templates/model.java`, 'utf-8'))
     .then(file => mustache.render(file, config))
     .then(renderedFile => fs.writeFile(filepath, renderedFile));
 };

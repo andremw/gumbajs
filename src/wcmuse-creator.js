@@ -16,7 +16,8 @@ module.exports = function wcmuseCreator(config) {
         };
     };
 
-    return fs.readFile('../templates/wcmuse.java', 'utf-8')
+    return Promise.resolve()
+    .then(() => fs.readFile('../templates/wcmuse.java', 'utf-8'))
     .then(file => mustache.render(file, config))
     .then(renderedFile => fs.writeFile(filepath, renderedFile));
 };
