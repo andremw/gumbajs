@@ -6,34 +6,43 @@ const fs = require('promised-io/fs');
 const htmlCreator = require('../src/html-creator');
 const tempDirCreator = require('./fixtures/temp-dir-creator');
 
-// test.only('Fails without required config', t => {
-//     t.throws(() => {
-//         htmlCreator();
-//     }, 'packageName is required!');
-//
-//     t.throws(() => {
-//         htmlCreator({
-//             packageName: 'whatever'
-//         });
-//     }, 'componentModelFolder is required!');
-//
-//     t.throws(() => {
-//         htmlCreator({
-//             packageName: 'whatever',
-//             componentModelFolder: 'whatever'
-//         });
-//     }, 'controllerName is required!');
-//
-//     t.throws(() => {
-//         htmlCreator({
-//             packageName: 'whatever',
-//             componentModelFolder: 'whatever',
-//             controllerName: 'whatever'
-//         });
-//     }, 'models is required!');
-// });
+test('Fails without required config', t => {
+    t.throws(() => {
+        htmlCreator();
+    }, 'filepath is required!');
 
-test.only('Creates HTML', async t => {
+    t.throws(() => {
+        htmlCreator({
+            filepath: 'whatever'
+        });
+    }, 'componentModelFolder is required!');
+
+    t.throws(() => {
+        htmlCreator({
+            filepath: 'whatever',
+            componentModelFolder: 'whatever'
+        });
+    }, 'controllerName is required!');
+
+    t.throws(() => {
+        htmlCreator({
+            filepath: 'whatever',
+            componentModelFolder: 'whatever',
+            controllerName: 'whatever'
+        });
+    }, 'models is required!');
+
+    t.throws(() => {
+        htmlCreator({
+            filepath: 'whatever',
+            componentModelFolder: 'whatever',
+            controllerName: 'whatever',
+            models: 'whatever'
+        });
+    }, 'packageName is required!');
+});
+
+test('Creates HTML', async t => {
     const tempFilepath = await tempDirCreator();
     const expectedFilename = 'ComponentX.html';
 
