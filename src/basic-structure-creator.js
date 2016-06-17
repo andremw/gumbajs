@@ -22,24 +22,25 @@ function createBasicStructure(config) {
     const htmlFile = 'component.html';
     const folderName = config.componentName;
     const folderPath = `${config.componentsDirPath}/${folderName}/`;
+    let filepath = null;
 
     sequence = sequence.then(() => {
-        return readFile(`../templates/${htmlFile}`).then(fileContent => {
-            const renderedFile = mustache.render(fileContent, config);
-            const filepath = `${folderPath}/${config.componentName}.html`;
-            return writeFile(filepath, renderedFile);
-        });
+        filepath = `${folderPath}/${config.componentName}.html`;
+        return readFile(`../templates/${htmlFile}`).then(handleReadFile);
     });
 
     xmlFiles.forEach(xmlFile => {
         sequence = sequence.then(() => {
-            return readFile(`../templates/${xmlFile}`).then(fileContent => {
-                const renderedFile = mustache.render(fileContent, config);
-                const filepath = `${folderPath}/${xmlFile}`;
-                return writeFile(filepath, renderedFile);
-            });
+            filepath = `${folderPath}/${xmlFile}`;
+            return readFile(`../templates/${xmlFile}`).then(handleReadFile);
         });
     });
+
+    function handleReadFile(fileContent) {
+        return Promise.resolve()
+        .then(() => mustache.render(fileContent, config))
+        .then(renderedFile => writeFile(filepath, renderedFile));
+    }
 
     return sequence;
 }
