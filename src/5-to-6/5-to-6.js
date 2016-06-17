@@ -40,7 +40,10 @@ module.exports = config => {
                     modelAttrs
                 };
 
-                return createModel(options).then(() => createdModels.push(modelName));
+                return createModel(options).then(() => createdModels.push({
+                    modelName,
+                    modelAttrs
+                }));
             });
             promises.push(promise);
         });
