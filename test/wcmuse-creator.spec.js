@@ -41,7 +41,7 @@ test('Creates WCMuse', async t => {
         packageName: 'marketingservices',
         componentModelFolder: 'MyWCMUse',
         controllerName: 'MyWCMUse',
-        models: ['Model1', 'Model2', 'Model3'],
+        models: [{modelName: 'Model1'}, {modelName: 'Model2'}, {modelName: 'Model3'}],
         filepath: tempFilepath
     };
 
