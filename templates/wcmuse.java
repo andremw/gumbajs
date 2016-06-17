@@ -7,19 +7,19 @@ import com.tccc.marketingservices.utils.PrepareDictionaryHelper;
 public class {{controllerName}} extends WCMUse {
 
     {{#models}}
-    private {{.}} {{#lowerCaseFirstLetter}}{{.}}{{/lowerCaseFirstLetter}};
+    private {{modelName}} {{#lowerCaseFirstLetter}}{{modelName}}{{/lowerCaseFirstLetter}};
     {{/models}}
 
     @Override
     public void activate() throws Exception {
         {{#models}}
-        this.{{#lowerCaseFirstLetter}}{{.}}{{/lowerCaseFirstLetter}} = getResource().adaptTo({{.}}.class);
+        this.{{#lowerCaseFirstLetter}}{{modelName}}{{/lowerCaseFirstLetter}} = getResource().adaptTo({{modelName}}.class);
         {{/models}}
     }
 
     {{#models}}
-    public {{.}} get{{.}}() {
-        return this.{{#lowerCaseFirstLetter}}{{.}}{{/lowerCaseFirstLetter}};
+    public {{modelName}} get{{modelName}}() {
+        return this.{{#lowerCaseFirstLetter}}{{modelName}}{{/lowerCaseFirstLetter}};
     }
 
     {{/models}}
