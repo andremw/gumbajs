@@ -10,6 +10,7 @@ const configCheck = require('../config-check');
 const parseModel = require('../helper/parse-model');
 const createModel = require('../model-creator');
 const wcmuseCreator = require('../wcmuse-creator');
+const htmlCreator = require('../html-creator');
 
 module.exports = config => {
     configCheck(['compDir', 'outputDir', 'packageName'], config);
@@ -40,7 +41,10 @@ module.exports = config => {
                     modelAttrs
                 };
 
-                return createModel(options).then(() => createdModels.push(modelName));
+                return createModel(options).then(() => createdModels.push({
+                    modelName,
+                    modelAttrs
+                }));
             });
             promises.push(promise);
         });
@@ -54,6 +58,16 @@ module.exports = config => {
             filepath: config.outputDir
         };
         return wcmuseCreator(options);
+    })
+    .then(() => {
+        const options = {
+            packageName: config.packageName,
+            componentModelFolder,
+            controllerName: config.controllerName,
+            models: createdModels,
+            filepath: config.outputDir
+        };
+        return htmlCreator(options);
     });
 
     return sequence;

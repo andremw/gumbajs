@@ -1,1 +1,13 @@
-<sly data-sly-include="../base/init.html"/>
+<div data-sly-use.wcmuse="com.tccc.{{packageName}}.components.{{controllerName}}">
+    {{#models}}
+    <sly data-sly-test.{{#lowerCaseFirstLetter}}{{modelName}}{{/lowerCaseFirstLetter}}="${ wcmuse.{{#lowerCaseFirstLetter}}{{modelName}}{{/lowerCaseFirstLetter}} }"/>
+
+    <h1>{{modelName}}</h1>
+    <ul>
+        {{#modelAttrs}}
+        <li><b>{{name}}:</b> {{#dollarit}} {{#lowerCaseFirstLetter}}{{modelName}}{{/lowerCaseFirstLetter}}.{{name}} {{/dollarit}}</li>
+        {{/modelAttrs}}
+    </ul>
+
+    {{/models}}
+</div>
