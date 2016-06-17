@@ -52,9 +52,9 @@ function createDir(componentsDirPath) {
 }
 
 function readFile(path) {
-    return Promise.resolve().then(() => fs.readFile(path, 'utf-8'));
+    return fs.readFile(path, 'utf-8');
 }
 
 function writeFile(path, content) {
-    return Promise.resolve().then(() => fs.writeFile(path, content));
+    return fs.writeFile(path, content);
 }
