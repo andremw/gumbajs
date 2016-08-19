@@ -19,6 +19,7 @@ function createBasicStructure(config) {
     let sequence = Promise.resolve();
 
     const xmlFiles = ['.content.xml', '_cq_editConfig.xml', 'dialog.xml'];
+    const templateFolder = `${__dirname}/../templates`;
     const htmlFile = 'component.html';
     const folderName = config.componentName;
     const folderPath = `${config.componentsDirPath}/${folderName}/`;
@@ -26,13 +27,13 @@ function createBasicStructure(config) {
 
     sequence = sequence.then(() => {
         filepath = `${folderPath}/${config.componentName}.html`;
-        return readFile(`../templates/${htmlFile}`).then(handleReadFile);
+        return readFile(`${templateFolder}/${htmlFile}`).then(handleReadFile);
     });
 
     xmlFiles.forEach(xmlFile => {
         sequence = sequence.then(() => {
             filepath = `${folderPath}/${xmlFile}`;
-            return readFile(`../templates/${xmlFile}`).then(handleReadFile);
+            return readFile(`${templateFolder}/${xmlFile}`).then(handleReadFile);
         });
     });
 

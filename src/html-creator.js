@@ -20,9 +20,10 @@ module.exports = function htmlCreator(config) {
     };
 
     const filepath = `${config.filepath}/${config.componentModelFolder}.html`;
+    const templatePath = `${__dirname}/../templates/component.html`;
 
     return Promise.resolve()
-    .then(() => fs.readFile('../templates/component.html', 'utf-8'))
+    .then(() => fs.readFile(templatePath, 'utf-8'))
     .then(file => mustache.render(file, config))
     .then(renderedFile => fs.writeFile(filepath, renderedFile));
 };

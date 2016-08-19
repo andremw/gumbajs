@@ -9,6 +9,7 @@ module.exports = config => {
     checkConfig(['componentModelFolder', 'modelName', 'modelAttrs', 'filepath', 'packageName'], config);
     const filename = `${config.modelName}.java`;
     const filepath = `${config.filepath}/${filename}`;
+    const templatePath = `${__dirname}/../templates/model.java`;
 
     config.capitalize = () => {
         return (val, render) => {
@@ -17,7 +18,7 @@ module.exports = config => {
     };
 
     return Promise.resolve()
-    .then(() => fs.readFile(`../templates/model.java`, 'utf-8'))
+    .then(() => fs.readFile(templatePath, 'utf-8'))
     .then(file => mustache.render(file, config))
     .then(renderedFile => fs.writeFile(filepath, renderedFile));
 };

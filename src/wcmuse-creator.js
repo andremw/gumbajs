@@ -9,6 +9,7 @@ module.exports = function wcmuseCreator(config) {
     checkConfig(['packageName', 'componentModelFolder', 'controllerName', 'models', 'filepath'], config);
     const fileName = capitalizeFirstLetter(`${config.componentModelFolder}.java`);
     const filepath = `${config.filepath}/${fileName}`;
+    const templatePath = `${__dirname}/../templates/wcmuse.java`;
 
     config.lowerCaseFirstLetter = () => {
         return (val, render) => {
@@ -17,7 +18,7 @@ module.exports = function wcmuseCreator(config) {
     };
 
     return Promise.resolve()
-    .then(() => fs.readFile('../templates/wcmuse.java', 'utf-8'))
+    .then(() => fs.readFile(templatePath, 'utf-8'))
     .then(file => mustache.render(file, config))
     .then(renderedFile => fs.writeFile(filepath, renderedFile));
 };

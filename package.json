@@ -1,6 +1,6 @@
 {
   "name": "gumbajs",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Component code generator for projects done with AEM and Sightly.",
   "main": "./src/api.js",
   "scripts": {
